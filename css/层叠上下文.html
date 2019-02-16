@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>层叠上下文</title>
+        <style>
+            .par {
+                border: 5px solid #fcc;
+                width: 300px;
+                /* overflow: hidden; */
+                /* display: inline-block */
+                /* position: absolute; */
+                /* float: left; */
+            }
+
+            .child {
+                border: 5px solid #f66;
+                width: 100px;
+                height: 100px;
+                float: left;
+            }
+        </style>
+    </head>
+    <!-- 层叠上下文规则 -->
+    <!-- 1 创建层叠上下文的元素的背景和边界；-->
+    <!-- 2 z-index为负值的子元素-->
+    <!-- 3 non-positioned的元素  -->
+    <!-- 4 non-positioned的浮动元素-->
+    <!-- 5 non-positioned的内联元素（文本等）-->
+    <!-- 6 z-index为0的positioned元素-->
+    <!-- 7 z-index大于等于1的positioned子元素；-->
+    <!-- 注释:non-positioned指不是position为fixed,absolute,relative的元素,即定位为static|设置的-->
+
+
+    <!-- 层叠上下文的生成条件 -->
+    <!-- 1 根元素 (HTML), -->
+    <!-- 2 绝对（absolute）定位或相对（relative）定位且 z-index 值不为"auto" -->
+    <!-- 3 一个 flex 项目(flex item)，且 z-index 值不为 "auto"，也就是父元素 display: flex|inline-flex -->
+    <!-- 4 元素的 opacity 属性值小于 1（参考 the specification for opacity） -->
+    <!-- 5 元素的 transform 属性值不为 "none" -->
+    
+    <!-- 6 元素的 mix-blend-mode 属性值不为 "normal" -->
+    <!-- 7 元素的 isolation 属性被设置为 "isolate" -->
+    <!-- 8 在 mobile WebKit 和 Chrome 22+ 内核的浏览器中，position: fixed 总是创建一个新的层叠上下文, 即使 z-index 的值是 "auto"  -->
+    <!-- 9 在 will-change 中指定了任意 CSS 属性，即便你没有定义该元素的这些属性 -->
+    <body>
+      <img src="../images/层叠上下文.png" alt="">
+    </body>
+</html>

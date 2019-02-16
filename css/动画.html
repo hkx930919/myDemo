@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动画</title>
+    <style>
+        div{
+            transition-property: all;
+            transition-duration: 0ms;
+            transition-timing-function: ease;
+            transition-delay: 0ms;
+            transition: width 1s ,background-color 2s,height 3s ;
+        }
+        @keyframes demo{
+            from {
+
+            }
+            to {
+
+            }
+        }
+    </style>
+</head>
+<body>
+ <!-- 1 过度 transition-->
+属性:
+            transition-property: all; 
+            transition-duration: 0ms;
+            transition-timing-function: ease;
+            transition-delay: 0ms;
+当要设置多个属性进行过渡时,用逗号区分; transition: width 1s ,background-color 2s,height 3s ;
+过渡有个时间可以监听:transitionend,该事件对象有三个属性,
+                                propertyName 发生transition效果的CSS属性名,
+                                elapsedTime 代表发生实际效果的持续时间。若完整进行，则返回完整时间；若中途中断，则返回实际时间;
+                                　          [注意]该属性具有兼容性问题，chrome返回持续时间加延迟时间，而其他浏览器只返回持续时间
+                                pseudoElement 如果transition效果发生在伪元素，会返回该伪元素的名称，以“::”开头。如果不发生在伪元素上，则返回一个空字符串''
+transitionend会在开始和结束触发,如果transition有多个属性进行过度,那么就会触发几次
+
+<div id="test"></div>
+<script>
+    test.addEventListener('transitionend',function(e){
+        console.log(e.propertyName,e.elapsedTime,e.pseudoElement);
+    })
+</script>
+
+<!-- 2 动画 animation -->
+属性:
+    animation-name
+    animation-duration
+    animation-timing-function   linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n)  动画的速度取消
+    animation-delay
+    animation-iteration-count   n|infinite              动画应该播放的次数
+    animation-direction         normal|alternate        是否应该轮流反向播放动画
+
+
+keyframes使用from to或者百分比来实现帧动画
+
+    
+</body>
+</html>
