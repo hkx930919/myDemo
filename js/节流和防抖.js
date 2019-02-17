@@ -38,4 +38,3 @@ function debounce(fn, time, immediate) {
     }, time);
   };
 }
-debounce();
