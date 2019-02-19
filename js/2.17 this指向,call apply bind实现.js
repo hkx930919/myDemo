@@ -61,7 +61,10 @@ Function.prototype.myapply = function (context, args) {
 // 5 bind 实现
 Function.prototype.mybind = function (context, ...rest) {
   const self = this;
-  return function () {
+  return function F() {
+    if (this instanceof F) {
+      return new self(...rest, ...arguments);
+    }
     const args = rest.concat(arguments);
     return self.apply(context, args);
   };
