@@ -10,6 +10,7 @@ module.exports = {
         "no-underscore-dangle":0,
         "prefer-rest-params":0,
         "eqeqeq":0,
+        "max-len":0,
         "no-prototype-builtins":0,//不准使用Object的原型方法
         "no-restricted-syntax":0,//不准使用一些语法
         "consistent-return":0,
