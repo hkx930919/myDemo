@@ -33,8 +33,16 @@ function receiveMessage(event)
   // event.data 是 popup发送给当前页面的消息 "hi there yourself!  the secret response is: rheeeeet!"
 }
 window.addEventListener("message", receiveMessage, false);    
+    
         
-        
+    </script>
+    <script>
+        for (var index = 0; index <10; index++) {
+           setTimeout(
+               console.log(index)
+             , 0);
+            
+        }
     </script>
 </body>
 </html>
