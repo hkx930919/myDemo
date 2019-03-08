@@ -7,6 +7,12 @@
     <title>postmessage</title>
 </head>
 <body>
+        otherWindow.postMessage(message, targetOrigin, [transfer]);
+        window.addEventListener('message')的事件对象中,data,,
+                                                data    从其他 window 中传递过来的对象数据。
+                                                origin  调用 postMessage  时消息发送方窗口的 origin
+                                                source  对发送消息的窗口对象的引用; 您可以使用此来在具有不同origin的两个窗口之间建立双向通信。
+
     <script>
         /*
  * A窗口的域名是<http://example.com:8080>，以下是A窗口的script标签下的代码：
