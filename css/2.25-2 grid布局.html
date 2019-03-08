@@ -73,7 +73,7 @@
                     item8
             </div>
         </div> -->
-        <!-- <style>
+        <style>
             .container {
                 display: grid;
                 grid-template-rows: repeat(2, 60px);
@@ -96,7 +96,7 @@
         <div class="container">
             <div class="item-a"></div>
             <div class="item-b"></div>
-        </div> -->
+        </div>
         <!-- grid布局的主要属性 -->
         1  容器属性：
         display:grid;
@@ -178,8 +178,36 @@
             <div class="item-b">bbb</div>
         </div> -->
 
+        <!-- 容器属性中的justify-items -->
+        <style>
+            .container{
+                height: 100px;
+                display: grid;
+                grid-template-rows: 40px 40px;
+                grid-template-columns: 60px 60px;
+                grid-gap: 5px 10px;
+                background: #ccc;
+                justify-items: stretch;
+                justify-content: center;
+                /* align-items: end; */
+                align-content: end;
+                align-items: stretch;
+            }
+            .item{
+                border-right: 1px solid green;
+                /* width: 30px; */
+                /* height: 30px; */
+                background: red;
+            }
+            
+        </style>
+        <div class="container">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
 
-        
+        </div>
         
     </body>
 </html>
