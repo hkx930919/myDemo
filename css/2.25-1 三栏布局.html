@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>三栏布局</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            section {
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <style>
+            #float .left {
+                background-color: pink;
+                float: left;
+                width: 200px;
+            }
+            #float .right {
+                background-color: #ccc;
+                float: right;
+                width: 200px;
+            }
+            #float .center {
+                background-color: #aa2;
+                margin: 0 200px;
+            }
+        </style>
+        <!--1  浮动：布局的时候中间内容层放在最右边 -->
+        <section id="float">
+            <aside class="left">左边</aside>
+            <aside class="right">右边</aside>
+            <article class="center">
+                中间
+                <p>第一段内容</p>
+            </article>
+        </section>
+        <style>
+            #position {
+                position: relative;
+            }
+            #position .left {
+                background-color: pink;
+                width: 200px;
+                position: absolute;
+            }
+            #position .right {
+                background-color: #ccc;
+                width: 200px;
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+            #position .center {
+                background-color: #aa2;
+
+                margin: 0 200px;
+            }
+        </style>
+        <!--2  定位：布局的时候中间内容层放在最右边 -->
+        <section id="position">
+            <aside class="left">左边</aside>
+            <article class="center">
+                中间
+                <p>第一段内容</p>
+            </article>
+            <aside class="right">右边</aside>
+        </section>
+        <style>
+            #flex {
+                position: relative;
+                display: flex;
+            }
+            #flex .left {
+                background-color: pink;
+                width: 200px;
+            }
+            #flex .right {
+                background-color: #ccc;
+                width: 200px;
+                right: 0;
+                top: 0;
+            }
+            #flex .center {
+                background-color: #aa2;
+                flex: 1;
+            }
+        </style>
+        <!--3  flex： -->
+        <section id="flex">
+            <aside class="left">左边</aside>
+            <article class="center">
+                中间
+                <p>第一段内容</p>
+            </article>
+            <aside class="right">右边</aside>
+        </section>
+        <style>
+            #table {
+                display: table;
+                width: 100%;
+            }
+            #table .left {
+                display: table-cell;
+                background-color: pink;
+                width: 200px;
+            }
+            #table .right {
+                display: table-cell;
+                background-color: #ccc;
+                width: 200px;
+                right: 0;
+                top: 0;
+            }
+            #table .center {
+                display: table-cell;
+                background-color: #aa2;
+            }
+        </style>
+        <!--4  table布局 -->
+        <section id="table">
+            <aside class="left">左边</aside>
+            <article class="center">
+                中间
+                <p>第一段内容</p>
+            </article>
+            <aside class="right">右边</aside>
+        </section>
+        <style>
+            #grid {
+                display: grid;
+                width: 100%;
+                grid-template-columns: 200px 1fr 200px;
+                grid-template-rows: auto
+            }
+            #grid .left {
+                display: table-cell;
+                background-color: pink;
+                width: 200px;
+            }
+            #grid .right {
+                display: table-cell;
+                background-color: #ccc;
+                width: 200px;
+                right: 0;
+                top: 0;
+            }
+            #grid .center {
+                display: table-cell;
+                background-color: #aa2;
+            }
+        </style>
+        <!--5  grid布局 -->
+        <section id="grid">
+            <aside class="left">左边</aside>
+            <article class="center">
+                中间
+                <p>第一段内容</p>
+            </article>
+            <aside class="right">右边</aside>
+        </section>
+    </body>
+</html>

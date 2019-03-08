@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>flex布局</title>
+        <style>
+      
+        </style>
+    </head>
+    <body>
+        <!-- 1 container 容器属性 -->
+        1 display:flex||inline-flex
+
+        2 flex-direction 主轴的方向 row | row-reverse | column | column-reverse;
+        3 flex-wrap 如何换行 nowrap | wrap | wrap-reverse
+        flex-flow 是flex-direction和flex-wrap的简写
+
+
+        4 justify-content 子项目如何在主轴方向排列 flex-start||flex-end | center | space-between | space-around | stretch;
+        5 align-items 项目在交叉轴上如何对齐
+        6 align-content 多根轴线的对齐方式
+
+        <!-- 2 item 的属性 -->
+        1 order 项目的排列顺序。数值越小，排列越靠前，默认为0 
+
+
+        2 flex-grow 项目的放大比例，默认为0。即如果存在剩余空间，也不放大。
+        3 flex-shrink 项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。
+        4 flex-basis 在分配多余空间之前，项目占据的主轴空间. 计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小
+        flex是 flex-grow,flex-shrink,flex-basis的缩写。默认值是0,1,auto
+
+        5 align-self是允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。
+                                 auto | flex-start | flex-end | center | baseline | stretch;
+        
+    </body>
+</html>
+
