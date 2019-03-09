@@ -344,4 +344,162 @@ http 缓存分为强缓存（200 from cache）和协商缓存(304)
     >1.1 普通文档流内可以理解为一个复合图层（这里称为默认复合层，里面不管添加多少元素，其实都是在同一个复合图层中）
     >1.2 absolute和fixed元素虽然脱离了普通文档流，但仍在同一个复合图层中
 2. 复合图层
-    >2.1 开启硬件加速可以开启一个新的复合图层。复合图层和
+    >2.1 开启硬件加速可以开启一个新的复合图层。复合图层之间是相互独立的,绘制的时候互不干扰,由GPU绘制
+    >2.2 所有做动画的时候一般使用硬件加速开启个图层.开启图层的时候注意使用zindex,防止浏览器默认给后续的元素创建复合层渲染
+####7 css和js相关知识
+#####7.1 盒模型 块元素 行内元素 BFC IFC css参考css目录
+#####7.2 JS执行上下文 VO AO 作用域链 this指向 js参考js目录
+#####7.3 js垃圾回收机制
+1. 标记清除 
+   >js引擎基础GC方案(simple GC ):mark and sweep(标记清除)
+   - 遍历所有可访问的对象,
+   - 回收已不可访问的对象
+    ```
+    当变量进入环境时，例如，在函数中声明一个变量，就将这个变量标记为“进入环境”。从逻辑上讲，永远不能释放进入环境的变量所占用的内存，因为只要执行流进入相应的环境，就可能会用到它们。
+    而当变量离开环境时，则将其标记为“离开环境”。
+    垃圾回收器在运行的时候会给存储在内存中的所有变量都加上标记（当然，可以使用任何标记方式）。
+    然后，它会去掉环境中的变量以及被环境中的变量引用的变量的标记（闭包，也就是说在环境中的以及相关引用的变量会被去除标记）。
+    而在此之后再被加上标记的变量将被视为准备删除的变量，原因是环境中的变量已经无法访问到这些变量了。
+    最后，垃圾回收器完成内存清除工作，销毁那些带标记的值并回收它们所占用的内存空间
+    ```
+2. 引用计数
+   ```
+   跟踪记录每个值被引用的次数，当一个值被引用时，次数+1，减持时-1，下次垃圾回收器会回收次数为0的值的内存（当然了，容易出循环引用的bug）
+   ```
+3. **GC的缺陷**
+   >GC时，停止响应其他操作.而Javascript的GC在100ms甚至以上
+4. **GC优化策略**
+   使用:*分代回收*
+   >1 多回收“临时对象”区（young generation）
+   >2 少回收“持久对象”区（tenured generation）
+   >3 减少每次需遍历的对象，从而减少每次GC的耗时。
+#### 8 跨域
+#####8.1 同源政策
+>同源指的是:协议相同,域名相同,端口号相同.
+- 1 同源的目的: 是为了保护用户信息的安全,防止恶意的网站窃取数据
+- 2 同源限制了哪些东西:
+  >2.1 cookie localStorage和indexDB
+  >2.2 dom无法获取
+  >2.3 ajax请求
+#####8.2 不同源的网站通信问题
+如果在iframe中,父窗口和子窗口不同源,可以采用以下方法进行通信
+- 1 改变iframe src中的锚点.子窗口监听hash值的改变,获取对应的信息
+    ```
+    var src = originURL + '#' + data;
+    document.getElementById('myIFrame').src = src;
+    window.onhashchange = checkMessage;
+
+    function checkMessage() {
+    var message = window.location.hash;
+    // ...
+    }
+    ```
+- 2 使用window.name属性
+  >这个属性的最大特点是，无论是否同源，只要在同一个窗口里，前一个网页设置了这个属性，后一个网页可以读取它。
+- 3 使用otherWindow.postMessage
+  >h5为了解决跨域通信的问题,引入了postMessage API.此api的详细信息参考[postmessage](js/postMessage1.html)
+  - 通过postMessage,可以读取其他窗口的localStorage信息
+#####8.3 不同源的网站ajax通信
+因为同源政策限制,ajax请求不能发送给不同源的网站.为此有以下几种方法解决
+- 1 JSONP
+  >该方法利用script标签可以请求不同源的文件.然后在src属性上传递回调参数.这样请求回来的文件解析时就会触发相应的回调函数
+- 2 websocket
+  >WebSocket是一种通信协议，使用ws://（非加密）和wss://（加密）作为协议前缀。该协议不实行同源政策，只要服务器支持，就可以通过它进行跨源通信。
+  
+  WebSocket请求的头信息
+    ```
+    GET /chat HTTP/1.1
+    Host: server.example.com
+    Upgrade: websocket
+    Connection: Upgrade
+    Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==
+    Sec-WebSocket-Protocol: chat, superchat
+    Sec-WebSocket-Version: 13
+    Origin: http://example.com //表示该请求的请求源（origin），即发自哪个域名
+    ```
+    **正是因为Origin字段,服务器可以根据这个字段，判断是否许可本次通信,所以WebSocket才没有实行同源政策**
+##### 8.4 单独的CORS
+  >跨源资源分享（Cross-Origin Resource Sharing）的缩写.它是W3C标准，是跨源AJAX请求的根本解决方法。相比JSONP只能发GET请求，CORS允许任何类型的请求。
+  
+  4.1  **CORS中分为简单请求和非简单请求**,满足以下条件的就是简单请求
+  1. 请求方法是以下三种方法之一：
+      - head,
+      - get 
+      - post
+  2. HTTP的头信息不超出以下几种字段
+      - Accept
+      - Accept-Language
+      - Content-Language
+      - Last-Event-ID
+      - Content-Type：只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain
+
+
+   4.2  **简单请求**
+    1. 对于简单请求，浏览器直接发出CORS请求。具体来说，就是在头信息之中，增加一个Origin字段。
+
+   4.3 **非简单请求**
+```
+    OPTIONS /cors HTTP/1.1
+    Origin: http://api.bob.com
+    Access-Control-Request-Method: PUT
+    Access-Control-Request-Headers: X-Custom-Header
+    Host: api.alice.com
+    Accept-Language: en-US
+    Connection: keep-alive
+    User-Agent: Mozilla/5.0...
+```
+
+    1. 对应的是PUT,DELETE请求,或者post请求但是content-type是application/json
+    2. 非简单请求,会在正式通信之前,增加一次http查询请求,称为"预检"请求（preflight）.预检请求使用的方式是options.
+   
+4.4 **预检请求**
+1. 请求头主要的字段:
+    >Origin
+    >Access-Control-Request-Method
+    >Access-Control-Request-Headers:该字段是一个逗号分隔的字符串，指定浏览器CORS请求会额外发送的头信息字段
+2. 响应头
+```
+        HTTP/1.1 200 OK
+        Date: Mon, 01 Dec 2008 01:15:39 GMT
+        Server: Apache/2.0.61 (Unix)
+        Access-Control-Allow-Origin: http://api.bob.com
+        Access-Control-Allow-Methods: GET, POST, PUT
+        Access-Control-Allow-Headers: X-Custom-Header
+        Content-Type: text/html; charset=utf-8
+        Content-Encoding: gzip
+        Content-Length: 0
+        Keep-Alive: timeout=2, max=100
+        Connection: Keep-Alive
+        Content-Type: text/plain
+```
+- 响应头主要的字段:
+            >Access-Control-Allow-Origin
+            >Access-Control-Allow-Methods: GET, POST, PUT
+            >Access-Control-Allow-Headers: X-Custom-Header
+            >Access-Control-Allow-Credentials: true
+            >Access-Control-Max-Age: 1728000
+- **响应头中的Max-Age**
+    >用来指定本次预检请求的有效期，单位为秒。上面结果中，有效期是20天（1728000秒），即允许缓存该条回应1728000秒（即20天），在此期间，不用发出另一条预检请求。
+        
+
+4.5 **如何在cors中传递cookie**
+- 1 在服务器端设置Access-Control-Allow-Credentials为true.
+        >该字段表示是否允许发送Cookie
+- 2 在ajax请求中设置xhr.withCredentials  = true
+- 3  Access-Control-Allow-Origin就不能设为星号，必须指定明确的、与请求网页一致的域名.
+    >同时，Cookie依然遵循同源政策，只有用服务器域名设置的Cookie才会上传，其他域名的Cookie并不会上传，且（跨源）原网页代码中的document.cookie也无法读取服务器域名下的Cookie。
+  
+
+#### 9 web安全
+#### 10 错误处理机制
+#### 11 viewport 移动端相关知识
+#### 12 性能优化
+#### 13 mpvue
+#### 14 Vue框架相关知识
+#### 15 react框架
+#### 16 nodejs
+#### 17 设计模式
+
+
+
+
