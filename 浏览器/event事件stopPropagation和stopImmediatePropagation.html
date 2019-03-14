@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Document</title>
+</head>
+<body>
+    <button>点我呀</button>
+    <script>
+        // 1 event.stopPropagation
+// 目的在执行完绑定到当前元素上的所有事件处理程序之后，停止执行所有后续节点的事件处理程序
+
+// 2 event.stopImmediatePropagation
+// 在当前节点以及事件链上的所有后续节点上，目的是在执行完当前事件处理程序之后，停止当前节点以及所有后续节点的事件处理程序的运行
+// 因为dom事件注册可以注册多次，push到一个数组中，如果使用了stopImmediatePropagation，那么只会执行该次，相同的后续dom时间注册都会失效
+        const btn  = document.querySelector('button')
+        btn.addEventListener('click',(e)=>{
+            e.stopImmediatePropagation()//使用之后，后续的2,3都不会打印
+
+            console.log(1);
+            
+        })
+        btn.addEventListener('click',(e)=>{
+            console.log(2);
+            
+        })
+        btn.addEventListener('click',(e)=>{
+            console.log(3);
+            
+        })
+    </script>
+</body>
+</html>

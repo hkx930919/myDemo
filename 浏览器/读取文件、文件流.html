@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>文件、文件流</title>
+    </head>
+    <body>
+        <script>
+            //1 使用Blob读取文件流，生成文件下载 URL.createObjectURL
+            // const objectURL = window.URL.createObjectURL(fileObj||blob);
+            // window.URL.revokeObjectURL(objectURL);释放一个通过URL.createObjectURL()创建的对象URL.
+
+            let data = ["a", "b", "c"];
+            const blob = new Blob(data, { type: "application/octet-stream" });
+            
+            //借用blob下载文件流
+            function downloadUrl(blob, fileName) {
+                try {
+                    // var blob = new Blob([blob], {type: 'application/octet-stream'});
+                    var link = document.createElement("a");
+                    document.body.appendChild(link);
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = fileName;
+                    link.click();
+                    window.URL.revokeObjectURL(link.href);
+                    document.body.removeChild(link);
+                    loading.close();
+                } catch (e) {
+                    loading && loading.close();
+                }
+            }
+
+            //2 使用FileReader读取文件内容，实现文件预览、上传二进制流
+            /*
+            方法：
+            abort():void	                终止文件读取操作
+            readAsArrayBuffer(file):void	异步按字节读取文件内容，结果用ArrayBuffer对象表示
+            readAsBinaryString(file):void	异步按字节读取文件内容，结果为文件的二进制串
+            readAsDataURL(file):void	    异步读取文件内容，结果用data:url的字符串形式表示
+            readAsText(file,encoding):void	异步按字符读取文件内容，结果用字符串形式表示
+            */
+           /*
+            属性：
+             error	                        一个DOMException，表示在读取文件时发生的错误 。
+            readyState	                    表示FileReader状态的数字。取值如下：        
+                                                            EMPTY	0	还没有加载任何数据.
+                                                            LOADING	1	数据正在被加载.
+                                                            DONE	2	已完成全部的读取请求.
+            result                          文件的内容。该属性仅在读取操作完成后才有效，数据的格式取决于使用哪个方法来启动读取操作。
+           */
+            /*
+            事件
+            onabort	        当读取操作被中止时调用
+            onerror	        当读取操作发生错误时调用
+            onload	        当读取操作成功完成时调用
+            onloadend	    当读取操作完成时调用,不管是成功还是失败
+            onloadstart	    当读取操作将要开始之前调用
+            onprogress	    在读取数据过程中周期性调用
+            */
+
+
+            var input = document.getElementById("file"); // input file
+            input.onchange = function() {
+                var file = this.files[0];
+                if (!!file) {
+                    var reader = new FileReader();
+                    reader.readAsArrayBuffer(file);
+                    reader.onload = function() {
+                        var binary = this.result;
+                        upload(binary);
+                    };
+                }
+            };
+
+            //文件上传
+            function upload(binary) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "http://xxxx/opload");
+                xhr.overrideMimeType("application/octet-stream");
+                //直接发送二进制数据
+                if (xhr.sendAsBinary) {
+                    xhr.sendAsBinary(binary);
+                } else {
+                    xhr.send(binary);
+                }
+
+                // 监听变化
+                xhr.onreadystatechange = function(e) {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            // 响应成功
+                        }
+                    }
+                };
+            }
+        </script>
+    </body>
+</html>
