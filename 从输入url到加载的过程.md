@@ -658,11 +658,15 @@ SELECT * FROM users WHERE name = '''' AND password = '''' or 1=1
 -   7 预渲染 &lt;link rel="prerender" href="http://example.com"&gt;
 -   8 使用 CDN 后，要考虑多域名.不然总会带上不需要的 cookie
 
-##### 2 js 优化
+##### 2 网络层面优化
+
+-   1 HTTP请求优化，减少|合并 http 请求，雪碧图
+-   2 HTTP缓存
+##### 3 浏览器渲染层面优化
 
 -   1 非可视区域懒加载，例如图片懒加载
 -   2 分时加载 timethunk 函数，节流，防抖
-#####3 webpack 优化
+##### 4webpack 优化
 **1 bundle 包优化**
 -   1 异步加载，常用的例如路由异步加载，import()语法
 -   2 提取公共资源
