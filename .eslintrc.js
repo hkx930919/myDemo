@@ -17,7 +17,9 @@ module.exports = {
         "no-shadow":1,
         "no-var":1,
         "no-eval":1,
-        "no-unused-vars":1
+        "no-continue":1,
+        "no-unused-vars":1,
+        "no-await-in-loop":0
     },
     "globals":{
         "eval":false,
