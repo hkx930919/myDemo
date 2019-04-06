@@ -127,7 +127,7 @@ MyPromise.prototype.then = function (onResolved, onRejected) {
     })));
   }
 };
-/*
+// /*
 // 规范 2.3
 function resolutionProcedure(promise2, x, resolve, reject) {
   // 规范 2.3.1，x 不能和 promise2 相同，避免循环引用
@@ -189,7 +189,7 @@ function resolutionProcedure(promise2, x, resolve, reject) {
     resolve(x);
   }
 }
-*/
+// */
 
 class MyPromise2 {
   constructor(fn) {

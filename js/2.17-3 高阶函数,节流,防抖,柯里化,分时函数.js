@@ -115,7 +115,7 @@ const render = function (data) {
     document.body.appendChild(div);
   }
 };
-render(ary);
+// render(ary);
 // 使用分时函数
 const timeThunk = function (data, fn, count) {
   let t;
@@ -123,6 +123,8 @@ const timeThunk = function (data, fn, count) {
     for (let i = 0; i < Math.min(count || 1, data.length); i++) {
       const obj = data.shift();
       fn(obj);
+      console.log('timethunk');
+      
     }
   };
   return function () {
@@ -139,12 +141,14 @@ const ary2 = [];
 for (let i = 0; i < 10000; i++) {
   ary2.push(i);
 }
-timeThunk(ary2, (i) => {
-  const div = document.createElement('div');
-  div.innerHTML = i;
-  document.body.appendChild(div);
+const action = timeThunk(ary2, (i) => {
+  // const div = document.createElement('div');
+  // div.innerHTML = i;
+  // document.body.appendChild(div);
+  console.log(i);
+  
 }, 8);
-
+// action()
 
 // 2.5 惰性函数
 // 不好的写法  每次调用函数都得做一次判断
