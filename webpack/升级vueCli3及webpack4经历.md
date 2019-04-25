@@ -239,6 +239,54 @@
     // 忽略哪些压缩的文件
     exclude: [/(.|_)min\.js$/],
     ```
+- 5 使用happy-loader开启多进程解析
+        ```
+        npm i happypack@next -D
+        const HappyPack = require("happypack");
+        const os = require("os");
+        const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
+
+         {
+            test: /\.vue$/,
+            loader: "happypack/loader?id=happyVue"
+        },
+        {
+            test: /\.js$/,
+            loader: "happypack/loader?id=happyBabel",
+            include: [
+            resolve("src"),
+            resolve("test"),
+            resolve("node_modules/webpack-dev-server/client")
+            ]
+        },
+        
+        plugins: [
+            new HappyPack({
+                id: "happyBabel",
+                loaders: [
+                    {
+                    loader: "babel-loader",
+                    options: {
+                        babelrc: true
+                        // cacheDirectory: true // 启用缓存
+                    }
+                    }
+                ],
+                threadPool: happyThreadPool
+            }),
+            new HappyPack({
+                id: "happyVue",
+                loaders: [
+                    {
+                    loader: "vue-loader",
+                    options: vueLoaderConfig
+                    }
+                ],
+                threadPool: happyThreadPool
+            }),
+        ]
+
+```
 
 #### 拎出来的 PreloadPlugin
 
