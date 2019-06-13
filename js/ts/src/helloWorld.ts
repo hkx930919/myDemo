@@ -42,3 +42,6 @@ greeter(user)
 let str:string
 
 str  ='1aaa'
+
+const student = new Student('first',1,'lastname')
+console.log('===student',student);
