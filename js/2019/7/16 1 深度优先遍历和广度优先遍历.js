@@ -42,8 +42,8 @@ const deepFind = (data, nodes = []) => {
   }
 }
 const nodes = []
-deepFind(data, nodes)
-console.log('nodes', nodes)
+// deepFind(data, nodes)
+// console.log('nodes', nodes)
 
 // 2 深度优先非递归
 const deepFind2 = data => {
@@ -91,4 +91,48 @@ const breadthFind = data => {
   }
 }
 
-breadthFind(data)
+// breadthFind(data)
+
+const toString = Object.prototype.toString
+const map = {
+  array: 'Array',
+  object: 'Object',
+  function: 'Function',
+  string: 'String',
+  number: 'Number',
+  boolean: 'Boolean',
+  null: 'Null',
+  undefined: 'Undefined'
+}
+const getType = v => toString.call(v).slice(8, -1)
+const isType = (v, type) => map[type] && getType(v) == map[type]
+//克隆
+const deepClone = obj => {
+  let obj2 = {}
+
+  if (isType(obj, 'array') || isType(obj, 'object')) {
+    obj2 = isType(obj, 'array') ? [] : {}
+    for (const k in obj) {
+      if (obj.hasOwnProperty(k)) {
+        const v = obj[k]
+        obj2[k] = deepClone(v)
+      }
+    }
+  } else if (isType(obj, 'function')) {
+    obj2 = eval(`(${obj})`)
+  } else {
+    obj2 = obj
+  }
+  return obj2
+}
+const data2 = {
+  a: {
+    b: 1
+  },
+  c: [9, 8, 7]
+}
+const clonedata = deepClone(data2)
+console.log('========', clonedata)
+clonedata.c.push('a')
+console.log('========11', clonedata)
+console.log('========22', data2)
