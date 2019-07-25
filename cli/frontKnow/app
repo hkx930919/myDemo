@@ -1,0 +1,92 @@
+#! /usr/bin/env node
+const program = require('commander')
+const inquirer = require('inquirer')
+const chalk = require('chalk')
+const success = (...args)=>{
+    console.log(chalk.green(...args)) 
+}
+program
+  .command('module') //义命令行指令，后面可跟上一个name，用空格隔开，如 .command( ‘app [name] ‘)
+  .alias('m')  // 定义一个更短的命令行指令 ，如执行命令$ app m 与之是等价的
+  .description('创建模块') // 描述，它会在help里面展示
+  .option('-a --name [moduleName]', '模块名称',(a)=>{
+    console.log('---option',a);
+    
+  },'ccc') //定义参数。它接受四个参数，在第一个参数中，它可输入短名字 -a和长名字–app ,使用 | 或者,分隔，在命令行里使用时，这两个是等价的，区别是后者可以在程序里通过回调获取到；第二个为描述, 会在 help 信息里展示出来；第三个参数为回调函数，他接收的参数为一个string，有时候我们需要一个命令行创建多个模块，就需要一个回调来处理；第四个参数为默认值
+  .action((a) => { //注册一个callback函数,这里需注意目前回调不支持let声明变量
+    console.log(chalk.green('hello', a))
+  })
+  .on('--help',()=>{
+    success('example')
+    success(`app module modulename`)
+    success(`app m modulename`)
+  })
+
+
+
+program
+    .command('file')
+    .alias('f')
+    .description('创建一个文件')
+    .option('--name [fileName]')
+    .option('--sass', '启用sass')
+    .option('--less', '启用less')
+    .action(option=>{
+        const config = Object.assign({
+            name:null,
+            description:'',
+            less:false,
+            sass:false
+        },option)
+        const promps = []
+        if(!config.filename){
+            promps.push({
+                type:'input',
+                name: 'moduleName',
+                message: '请输入模块名称',
+                validate: function (input){
+                    if(!input) {
+                        return '不能为空'
+                    }
+                    return true
+                }
+            })
+        }
+        if(config.description !== 'string') {
+            promps.push({
+                type: 'input',
+                name: 'moduleDescription',
+                message: '请输入模块描述'
+            })
+        }
+        if(config.sass === false && config.less ===false) {
+            promps.push({
+              type: 'list',
+              name: 'cssPretreatment',
+              message: '想用什么css预处理器呢',
+              choices: [
+                {
+                  name: 'Sass/Compass',
+                  value: 'sass'
+                },
+                {
+                  name: 'Less',
+                  value: 'less'
+                }
+              ]
+            })
+          }
+          inquirer.prompt(promps).then(function (answers) {
+            console.log(chalk.green('收工咯'))
+            console.log(chalk.blue('收工咯'))
+            console.log(chalk.blue.bgRed('收工咯')) //支持设置背景
+            console.log(chalk.blue(JSON.stringify(answers)))
+        })
+    })
+
+
+    program.parse(process.argv) //– 解析命令行
+
+if (!program.args.length) {
+  program.help()
+}
