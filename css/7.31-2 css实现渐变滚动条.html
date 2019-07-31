@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>css实现渐变滚动条</title>
+    <style>
+      /* 利用渐变 */
+      body {
+        background-image: linear-gradient(to right top, #ffcc00 50%, #eee 50%);
+        background-repeat: no-repeat;
+      }
+      body::after {
+        background-color: #fff;
+        position: fixed;
+        content: '';
+        top: 5px;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: -1;
+      }
+      /* body section:nth-child(1) {
+        background-color: pink;
+      }
+      body section:nth-child(2) {
+        background-color: red;
+      }
+      body section:nth-child(3) {
+        background-color: peru;
+      }
+      body section:nth-child(4) {
+        background-color: antiquewhite;
+      }
+      body section:nth-child(5) {
+        background-color: bisque;
+      } */
+      section {
+        height: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <section>11111111111111111111111111111111111111111</section>
+    <section>2222222222222222222222222</section>
+    <section>22333333333333333333333333</section>
+    <section>333344444444444444444444444444444444444</section>
+    <section>45555555555555555555555555</section>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>css是否会阻塞dom</title>
+    <style>
+      h1 {
+        color: red;
+      }
+    </style>
+    <script>
+      setTimeout(() => {
+        console.log(document.querySelector('h1'))
+      }, 0)
+      //   Promise.resolve(() => {
+
+      //   })
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.css"
+    />
+  </head>
+  <body>
+    <h1>
+      css是否会阻塞dom
+    </h1>
+  </body>
+</html>

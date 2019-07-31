@@ -50,12 +50,12 @@
  *
  */
 
-class Person {
-    protected name: string;
-    protected constructor(theName: string) {
-        this.name = theName;
-    }
-}
+// class Person {
+//   protected name: string
+//   protected constructor(theName: string) {
+//     this.name = theName
+//   }
+// }
 
 // Employee 能够继承 Person
 // class Employee extends Person {
@@ -96,8 +96,8 @@ class Person {
  * 除了使用readonly来定义, public,protected,private 也是一样
  */
 class Octopus {
-    readonly numberOfLegs: number = 8;
-    constructor(readonly name: string) {}
+  readonly numberOfLegs: number = 8
+  constructor(readonly name: string) {}
 }
 
 //5  get set 存取器 拦截属性
@@ -105,33 +105,29 @@ class Octopus {
  * 1 存取器要求你将编译器设置为输出ECMAScript 5或更高。 不支持降级到ECMAScript 3。
  * 2 只带有 get不带有 set的存取器自动被推断为 readonly
  */
-let passcode = "secret passcode";
+let passcode = 'secret passcode'
 
 class Employee {
-    private _fullName: string;
+  private _fullName: string
 
-    get fullName(): string {
-        return this._fullName;
-    }
+  get fullName(): string {
+    return this._fullName
+  }
 
-    set fullName(newName: string) {
-        if (passcode && passcode == "secret passcode") {
-            this._fullName = newName;
-        } else {
-            console.log("Error: Unauthorized update of employee!");
-        }
+  set fullName(newName: string) {
+    if (passcode && passcode == 'secret passcode') {
+      this._fullName = newName
+    } else {
+      console.log('Error: Unauthorized update of employee!')
     }
+  }
 }
 
-let employee = new Employee();
-employee.fullName = "Bob Smith";
+let employee = new Employee()
+employee.fullName = 'Bob Smith'
 // if (employee.fullName) {
 //     alert(employee.fullName);
 // }
-
-
-
-
 
 //6 静态属性
 /**
@@ -139,23 +135,20 @@ employee.fullName = "Bob Smith";
  * 2 访问静态属性要加上类名
  */
 class Grid {
-    static origin = {x: 0, y: 0};
-    calculateDistanceFromOrigin(point: {x: number; y: number;}) {
-        let xDist = (point.x - Grid.origin.x);
-        let yDist = (point.y - Grid.origin.y);
-        return Math.sqrt(xDist * xDist + yDist * yDist) / this.scale;
-    }
-    constructor (public scale: number) { }
+  static origin = { x: 0, y: 0 }
+  calculateDistanceFromOrigin(point: { x: number; y: number }) {
+    let xDist = point.x - Grid.origin.x
+    let yDist = point.y - Grid.origin.y
+    return Math.sqrt(xDist * xDist + yDist * yDist) / this.scale
+  }
+  constructor(public scale: number) {}
 }
 
-let grid1 = new Grid(1.0);  // 1x scale
-let grid2 = new Grid(5.0);  // 5x scale
+let grid1 = new Grid(1.0) // 1x scale
+let grid2 = new Grid(5.0) // 5x scale
 
-console.log(grid1.calculateDistanceFromOrigin({x: 10, y: 10}));
-console.log(grid2.calculateDistanceFromOrigin({x: 10, y: 10}));
-
-
-
+console.log(grid1.calculateDistanceFromOrigin({ x: 10, y: 10 }))
+console.log(grid2.calculateDistanceFromOrigin({ x: 10, y: 10 }))
 
 //7 抽象类 abstract关键字是用于定义抽象类和在抽象类内部定义抽象方法。
 /**
@@ -165,37 +158,62 @@ console.log(grid2.calculateDistanceFromOrigin({x: 10, y: 10}));
  * 4 抽象类中的抽象方法不包含具体实现并且必须在派生类中实现
  */
 abstract class Department {
+  constructor(public name: string) {}
 
-    constructor(public name: string) {
-    }
+  printName(): void {
+    console.log('Department name: ' + this.name)
+  }
 
-    printName(): void {
-        console.log('Department name: ' + this.name);
-    }
-
-    abstract printMeeting(): void; // 必须在派生类中实现
+  abstract printMeeting(): void // 必须在派生类中实现
 }
 
 class AccountingDepartment extends Department {
+  constructor() {
+    super('Accounting and Auditing') // 在派生类的构造函数中必须调用 super()
+  }
 
-    constructor() {
-        super('Accounting and Auditing'); // 在派生类的构造函数中必须调用 super()
-    }
+  printMeeting(): void {
+    console.log('The Accounting Department meets each Monday at 10am.')
+  }
 
-    printMeeting(): void {
-        console.log('The Accounting Department meets each Monday at 10am.');
-    }
-
-    generateReports(): void {
-        console.log('Generating accounting reports...');
-    }
+  generateReports(): void {
+    console.log('Generating accounting reports...')
+  }
 }
-const ag =new AccountingDepartment()
-console.log('agggggggggggggg',ag);
+const ag = new AccountingDepartment()
+console.log('agggggggggggggg', ag)
 ag.printName()
 ag.printMeeting()
 ag.generateReports()
 
+/**
+ * 类的赋值与再修改
+ * 还是和js一样，引用类型修改也是对应的修改
+ */
+class Greeter {
+  static standardGreeting = 'Hello, there'
+  greeting: string
+  greet() {
+    if (this.greeting) {
+      return 'Hello, ' + this.greeting
+    } else {
+      return Greeter.standardGreeting
+    }
+  }
+}
 
+let greeter1: Greeter
+greeter1 = new Greeter()
+console.log(11111111111, greeter1.greet())
 
-export {};
+let greeterMaker: typeof Greeter = Greeter
+greeterMaker.standardGreeting = 'Hey there!'
+
+let greeter2: Greeter = new greeterMaker()
+console.log(222222222222, greeter2.greet())
+console.log('----------Greeter.standardGreeting', Greeter.standardGreeting)
+console.log(
+  '======greeterMaker.standardGreeting',
+  greeterMaker.standardGreeting
+)
+console.log(33333333, greeter1.greet())
