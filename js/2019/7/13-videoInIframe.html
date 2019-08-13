@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>iframe嵌套video</title>
+    <style>
+      #myiframe {
+        width: 150px;
+        height: 150px;
+        border: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrap">
+      <iframe id="myiframe" frameborder="0"></iframe>
+    </div>
+  </body>
+  <script src="http://qnc.hunliji.com/fastclick.min.js"></script>
+
+  <script>
+    document.addEventListener(
+      'DOMContentLoaded',
+      function() {
+        FastClick.attach(document.body)
+      },
+      false
+    )
+  </script>
+  <script src="http://qnc.hunliji.com/vconsole-3.2.0.min.js"></script>
+  <script>
+    // init vConsole
+    var vConsole = new VConsole()
+  </script>
+  <script>
+    const iframe = document.querySelector('#myiframe')
+    const wrap = document.querySelector('#wrap')
+    iframedoc = iframe.contentDocument || iframe.contentWindow.document
+    iframedoc.body.innerHTML = ` <video
+      style="width:100%;height: 100%;"
+      src="http://pili-vod.hunliji.com/live306preview1533891960-1533891970.mp4"
+      autoplay
+      muted
+      webkit-playsinline="true"
+      playsinline="true"
+      preload="auto"
+    ></video>`
+    wrap.addEventListener('click', e => {
+      console.log('====================================')
+      console.log('点击iframe')
+      console.log('====================================')
+    })
+  </script>
+</html>
