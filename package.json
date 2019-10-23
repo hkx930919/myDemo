@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "file":"node ./scripts/createJsFile.js"
+    "file": "node ./scripts/createJsFile.js"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +22,7 @@
     "eslint-config-airbnb": "^17.1.0",
     "execa": "^2.1.0",
     "fs-extra": "^8.1.0",
+    "glob": "^7.1.4",
     "inquirer": "^7.0.0",
     "moment": "^2.24.0"
   }
