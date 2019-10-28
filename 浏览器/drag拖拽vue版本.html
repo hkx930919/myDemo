@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>拖拽</title>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <style>
+      #drag{
+        text-align: center;
+      }
+      .item.in{
+        background-color: #e0e0e0;
+      }
+      .item{
+        display: flex;
+        flex-direction: column;
+        height: 100px;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+        padding: 10px;
+      }
+      .item img{
+        width: 70px;
+        height: 70px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="drag">
+      
+      <template v-for="(item,index) in list">
+        <div :class="['item',{in:item.isInDom}]" draggable="true" :data-sort="index" @dragstart="dragstart" @dragenter="dragenter($event,item)" @dragover="dragover"  @dragleave="dragleave($event,item)" @drop="drop" @dragend="dragend">
+          <img :src="item.modelbrandlogourl" alt=""  :data-sort="index"  >
+          <span class="desc"  :data-sort="index" >
+            {{item.modelbrandname}}
+          </span>
+        </div>
+      </template>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+    new Vue({
+      el:'#drag',
+      data(){
+        return {
+          list:[
+                {
+                    isInDom:false,
+                    "modelbrandname": "长安",
+                    "modelbrandlogourl": "http://epcsfiles.hks360.com/modelbrand/269/长安.jpg"
+                },
+                {
+                  isInDom:false,
+                    "modelbrandname": "长城",
+                    "modelbrandlogourl": "http://epcsfiles.hks360.com/modelbrand/273/长城.png"
+                },
+                {
+                  isInDom:false,
+                    "modelbrandname": "中华",
+                    "modelbrandlogourl": "http://epcsfiles.hks360.com/modelbrand/293/中华.png"
+                },
+                {
+                  isInDom:false,
+                    "modelbrandname": "中顺",
+                    "modelbrandlogourl": "http://epcsfiles.hks360.com/modelbrand/335/中顺.jpg"
+                },
+                {
+                  isInDom:false,
+                    "modelbrandname": "中兴",
+                    "modelbrandlogourl": "http://epcsfiles.hks360.com/modelbrand/336/中兴.png"
+                },
+                {
+                  isInDom:false,
+                    "modelbrandname": "众泰",
+                    "modelbrandlogourl": "http://epcsfiles.hks360.com/modelbrand/337/众泰.png"
+                },
+                {
+                  isInDom:false,
+                    "modelbrandname": "知豆",
+                    "modelbrandlogourl": "http://epcsfiles.hks360.com/modelbrand/395/知豆.png"
+                },
+                {
+                  isInDom:false,
+                    "modelbrandname": "之诺",
+                    "modelbrandlogourl": "http://epcsfiles.hks360.com/modelbrand/405/之诺.png"
+                },
+                {
+                  isInDom:false,
+                    "modelbrandname": "长安商用",
+                    "modelbrandlogourl": "http://epcsfiles.hks360.com/modelbrand/415/长安商用.jpg"
+                },
+                {
+                    isInDom:false,
+                    "modelbrandname": "中欧",
+                    "modelbrandlogourl": "http://epcsfiles.hks360.com/modelbrand/417/中欧.jpg"
+                }
+            ],
+        }
+      },
+      methods: {
+        /**
+          * * 当用户开始拖动一个元素或者一个选择文本的时候 dragstart 事件就会触发。
+        */
+        dragstart(e){
+          this.fromIndex = e.target.dataset.sort
+        },
+        /**
+         * * 当拖动的元素或被选择的文本进入有效的放置目标时， dragenter 事件被触发
+         */
+        dragenter(e,item){
+          item.isInDom = true
+        },
+        /**
+         * * 当一个被拖动的元素或者被选择的文本离开一个有效的拖放目标时，将会触发dragleave 事件。
+         * 
+        */
+        dragleave(e,item){
+          item.isInDom = false
+        },
+        /**
+         * * 当元素或者选择的文本被拖拽到一个有效的放置目标上时，触发 dragover 事件(每几百毫秒触发一次)。
+         * @阻止默认动作
+        */
+        dragover(e){
+          e.preventDefault();
+        },
+        /**
+         * * 当一个元素或是选中的文字被拖拽释放到一个有效的释放目标位置时，drop 事件被抛出
+         *  @阻止默认动作 (如打开一些元素的链接)
+        */
+        drop(e){
+          e.preventDefault()
+          this.toIndex = e.target.dataset.sort
+          console.log('=========fromIndex',this.fromIndex);
+          console.log('=========toIndex',this.toIndex);
+          if(this.toIndex!==this.fromIndex){
+            const tmp = this.list[this.toIndex]
+            // this.$set(this.list,this.toIndex,this.list[this.fromIndex])
+            // this.$set(this.list,this.fromIndex,tmp)
+            this.list[this.toIndex] = this.list[this.fromIndex]
+            this.list[this.fromIndex] = tmp
+          }
+        },
+        /**
+         * 拖放事件在拖放操作结束时触发(通过释放鼠标按钮或单击escape键)。
+        */
+        dragend(){
+          this.list = this.list.map(item=>{
+            item.isInDom = false
+            return item
+          })
+        }
+      },
+      created() {
+        this.fromIndex = null
+        this.toIndex = null
+        this.activeDom = null
+      },
+    })
+    </script>
+  </body>
+</html>

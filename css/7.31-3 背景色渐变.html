@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>渐变背景色</title>
+    <style>
+      /* 利用 -webkit-background-clip + background-image + color: transparent;*/
+      .demo {
+        font-size: 50px;
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        background-image: linear-gradient(90deg, #7e40ee 0%, #63d9ee 100%);
+      }
+      .demo2 {
+        background-image: url(https://tpc.googlesyndication.com/daca_images/simgad/6497457119647867279);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="demo">
+      这是 DEMO1
+    </div>
+    <div class="demo demo2">
+      这是 DEMO2
+    </div>
+  </body>
+</html>

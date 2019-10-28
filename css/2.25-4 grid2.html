@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+</head>
+<body>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: grid;
+            grid: repeat(2,40px)/repeat(2,40px);
+            grid-gap: 10px 20px;
+        }
+        .item-a {
+            background-color: #eee;
+        }
+        /* 当不设置grid-auto-columns的宽度时，每一格的宽度为屏幕多余的宽度减去grid的宽度，然后均分宽度 */
+        .item {
+            background-color: green;
+        }
+    </style>
+    <div class="container">
+        <div class="item">aaa</div>
+        <div class="item">bbb</div>
+        <div class="item">ccc</div>
+        <div class="item">ddd</div>
+    </div>
+</body>
+</html>

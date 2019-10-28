@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+        <style>
+            .par {
+                border: 5px solid #fcc;
+                width: 300px;
+                /* overflow: hidden; */
+                /* display: inline-block */
+                /* position: absolute; */
+                /* float: left; */
+            }
+
+            .child {
+                border: 5px solid #f66;
+                width: 100px;
+                height: 100px;
+                float: left;
+            }
+        </style>
+    </head>
+    <!-- BFC布局规则 -->
+    <!-- 1 内部的box会垂直排列,且属于同一个的BFC的垂直margin会重叠-->
+    <!-- 2 元素的左边与包含块的border-box左边接触,即使浮动也是如此.所以有浮动元素时,会重叠,只要让一个元素成为BFC即可以解决这个问题-->
+    <!-- 3 承接第二条,BFC不会与浮动元素重叠-->
+    <!-- 4 计算BFC的高度,浮动元素也参与计算-->
+    <!-- 5 BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。-->
+
+
+    <!-- BFC的生成条件 -->
+    <!-- 1 根元素 -->
+    <!-- 2 浮动 float不为none -->
+    <!-- 3 定位 absolute或者fixed -->
+    <!-- 4 display 为inline-block|flex|inline-flex|table-cell|table-caption -->
+    <!-- 5 overflow 不为visible的元素 -->
+    <body>
+        <!-- 清除浮动 -->
+        <div class="par">
+            <div class="child"></div>
+            <div class="child"></div>
+        </div>  
+        <!-- 自适应两栏布局 -->
+        <!-- 浮动+BFC -->
+    </body>
+</html>

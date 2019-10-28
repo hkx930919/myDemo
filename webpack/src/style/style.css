@@ -1,0 +1,25 @@
+
+/* @font-face {
+    font-family: 'myfont';
+    src:
+      url('image/SassIconFont.ttf') format('truetype'),
+      url('image/SassIconFont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+  } */
+
+body{
+    background-color: #ccc;
+}
+button{
+    display: block;
+}
+.hello{
+    color: red;
+}
+.hello::before{
+    font-family: 'myfont';
+    content: "\e91b";
+  color: #36f;
+  font-size: 32px;
+}

@@ -1,0 +1,9 @@
+本周工作：
+1 客资ui修改
+2 会话页面客资相关api迁移上线
+
+下周工作
+1 会话ui
+
+总结
+本周遇到一个由于引入fastclick（脚手架自带的，一个解决移动端点击300ms延迟的工具）而导致ios11以上的机型点击时键盘不能弹出，需要多次点击才可以弹出键盘。后续发现是由于ios11.3之后支持了事件的{passive: false}被动模式，减少滚动屏幕的性能损耗和奔溃，导致在fastclick中event.preventDefault失效了，同时fastclick聚焦方法里面的setSelectionRange方法在ios11.3之后不再有聚焦的功能，才导致在ios11.3之后需要多次点击input框才能聚焦。后续修改了fastclick的聚焦方法后修复此问题
