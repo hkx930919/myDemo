@@ -34,7 +34,7 @@
     "xml-loader": "^1.2.1"
   },
   "dependencies": {
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.13",
     "uglifyjs-webpack-plugin": "^1.2.5"
   },
   "sideEffects": [
