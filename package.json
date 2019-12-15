@@ -1,36 +1,28 @@
 {
-  "name": "mydemo",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-<<<<<<< HEAD
-    "test": "echo \"Error: no test specified\" && exit 1"
-=======
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "file":"node ./scripts/createJsFile.js"
->>>>>>> 92f81af84ede766a95ae0c3060d62aebe5d8e3a9
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "eslint": "^5.12.1",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.15.0",
-    "eslint-plugin-jsx-a11y": "^6.2.0",
-    "eslint-plugin-react": "^7.12.4",
-    "express": "^4.16.4"
-  },
-  "dependencies": {
-<<<<<<< HEAD
-    "eslint-config-airbnb": "^17.1.0"
-=======
-    "chalk": "^2.4.2",
-    "eslint-config-airbnb": "^17.1.0",
-    "execa": "^2.1.0",
-    "fs-extra": "^8.1.0",
-    "inquirer": "^7.0.0",
-    "moment": "^2.24.0"
->>>>>>> 92f81af84ede766a95ae0c3060d62aebe5d8e3a9
-  }
+    "name": "mydemo",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "file": "node ./scripts/createJsFile.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "eslint": "^5.12.1",
+        "eslint-config-airbnb": "^17.1.0",
+        "eslint-plugin-import": "^2.15.0",
+        "eslint-plugin-jsx-a11y": "^6.2.0",
+        "eslint-plugin-react": "^7.12.4",
+        "express": "^4.16.4"
+    },
+    "dependencies": {
+        "chalk": "^2.4.2",
+        "eslint-config-airbnb": "^17.1.0",
+        "execa": "^2.1.0",
+        "fs-extra": "^8.1.0",
+        "inquirer": "^7.0.0",
+        "moment": "^2.24.0"
+    }
 }
