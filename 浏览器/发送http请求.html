@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>测试视频播放</title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <button>发送请求</button>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+      document.querySelector('button').addEventListener('click', function() {
+        axios
+          .post(
+            'https://dev-api.hunliji.com/hms/hljMerchantCenter/appApi/login/password',
+            {
+              account: '18668096038',
+              password: '123456',
+              redirectUrl:
+                'https://dev.hunliji.com/p/wedding/Public/admin/local_merchant_react/dist/index.html?mtoken=lTnk1ltD4woGDwiNiGhS2g'
+            }
+          )
+          .then(function(response) {
+            console.log(response)
+          })
+          .catch(function(error) {
+            window.location.href =
+              'https://dev.hunliji.com/p/wedding/Public/admin/local_merchant_react/dist/index.html?mtoken=lTnk1ltD4woGDwiNiGhS2g'
+            console.log(error)
+          })
+      })
+    </script>
+  </body>
+</html>
