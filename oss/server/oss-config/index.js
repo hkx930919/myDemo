@@ -1,6 +1,6 @@
 module.exports = {
-  AccessKeyId: 'LTAI4FrrfxBJjxobQW2R1bz9',
-  AccessKeySecret: 'Ve6JEnyIJIuhSZ1Hk6gcDZy9irAMst',
+  AccessKeyId: 'LTAI4FrQxiKtifQT5rhyqiFZ', // 子账号key
+  AccessKeySecret: '0NVT96jXJAAfaR9QLQg4F5fqJdAGHQ', // 子账号 secret
   TokenExpireTime: 3600,
-  RoleArn: '<role-arn>'
+  RoleArn: 'acs:ram::1359996063005571:role/ram-sts' //扮演角色的ID
 }
