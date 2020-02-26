@@ -43,13 +43,14 @@ export default {
           accessKeyId: AccessKeyId,
           accessKeySecret: AccessKeySecret,
           bucket: BUCKET_NAME,
-          stsToken: SecurityToken
+          stsToken: SecurityToken,
+          region: "oss-cn-hangzhou"
         });
         console.log("=====client", client);
         console.log("=====client.multipartUpload", client.multipartUpload);
 
         client
-          .multipartUpload("images", file)
+          .multipartUpload(file.name, file)
           .then(function(result) {
             console.log(result);
           })
