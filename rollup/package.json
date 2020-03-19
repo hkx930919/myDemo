@@ -1,0 +1,21 @@
+{
+    "name": "rollup",
+    "version": "1.0.0",
+    "description": "",
+    "main": "ueditor.all.js",
+    "scripts": {
+        "build:amd": "rollup ueditor.all.js -f amd -o ./dist/ueditor.all.amd.js",
+        "build:cjs": "rollup ueditor.all.js -f cjs -o ./dist/ueditor.all.cjs.js",
+        "build:es": "rollup ueditor.all.js -f es -o ./dist/ueditor.all.es.js",
+        "build:iife": "rollup ueditor.all.js -f iife -n result -o ./dist/ueditor.all.iife.js",
+        "build:umd": "rollup ueditor.all.js -f umd -n result -o ./dist/ueditor.all.umd.js",
+        "build:all": "npm run build:amd && npm run build:cjs && npm run build:es && npm run build:iife && npm run build:umd",
+        "build": "rollup -c",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "jin_gang <jin_gang@hunliji.com>",
+    "license": "ISC",
+    "devDependencies": {
+        "rollup-plugin-uglify": "^6.0.4"
+    }
+}
