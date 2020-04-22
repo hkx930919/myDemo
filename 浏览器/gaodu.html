@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #div {
+        width: 100px;
+        height: 100px;
+        border: 5px solid;
+        padding: 6px;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="div"></div>
+    <script>
+      const div = document.querySelector('#div')
+      const { marginTop, marginBottom, height } = window.getComputedStyle(div)
+      console.log('marginTop', marginTop)
+      console.log('marginBottom', marginBottom)
+      console.log('height', height)
+
+      console.log('clientHeight:', div.clientHeight)
+      console.log('offsetHeight:', div.offsetHeight)
+    </script>
+  </body>
+</html>
