@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      #PrintOrderContainer {
+        display: table;
+        width: 100%;
+        word-break: break-all;
+        white-space: pre-wrap;
+        font-size: 12px;
+        box-sizing: border-box;
+        line-height: 20px;
+      }
+      .page-break {
+        display: block;
+        page-break-before: always;
+        margin-bottom: 40px;
+        color: transparent;
+      }
+      .page-break.not-break {
+        page-break-before: avoid;
+      }
+
+      .print-header {
+        width: 100%;
+      }
+      .print-insert-field {
+        color: #000 !important;
+      }
+      .selectTdClass {
+        background-color: #edf5fa !important;
+      }
+      table.noBorderTable td,
+      table.noBorderTable th,
+      table.noBorderTable caption {
+        border: 1px dashed #d2d2d2 !important;
+      }
+      table {
+        width: 100%;
+        margin-bottom: 10px;
+        border-collapse: collapse;
+        display: table;
+      }
+      td,
+      th {
+        white-space: pre-wrap !important;
+        padding: 6px 12px;
+        border: 1px solid #d2d2d2;
+        border-collapse: collapse;
+      }
+      caption {
+        border: 1px dashed #d2d2d2;
+        border-bottom: 0;
+        padding: 3px;
+        text-align: center;
+      }
+      th {
+        border-top: 1px solid #bbb;
+        background-color: #f7f7f7;
+      }
+      table tr.firstRow th {
+        border-top-width: 2px;
+      }
+      .ue-table-interlace-color-single {
+        background-color: #fcfcfc;
+      }
+      .ue-table-interlace-color-double {
+        background-color: #f7faff;
+      }
+      td p {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="print-header">
+      <div
+        style="font-size: 12px; padding: 2px 0px 10px; display: flex; align-items: center; justify-content: space-between;"
+      >
+        <div>
+          <span
+            contenteditable="false"
+            class="print-insert-field"
+            data-value="corporationVO.name"
+            data-name="企业名称"
+            >{{corporationVO.name}}</span
+          >
+        </div>
+        <div style="text-align: right;">
+          No.<span
+            contenteditable="false"
+            class="print-insert-field"
+            data-value="orderInfo.id"
+            data-name="订单ID"
+            >{{orderInfo.id}}</span
+          >
+        </div>
+      </div>
+      <div
+        style="height: 2px; background: rgb(153, 153, 153); margin-bottom: 2px;"
+      ></div>
+      <div style="height: 1px; background: rgb(153, 153, 153);"></div>
+    </div>
+    <p
+      class="print-title"
+      style="text-align: center; font-weight: bold; font-size: 20px; margin: 16px 0px;"
+    >
+      自定义标题
+    </p>
+    <table style="width: 100%; margin-bottom: 16px;">
+      <tbody>
+        <tr class="firstRow">
+          <td style="width: 80px; font-size: 12px; padding-left: 8px;">
+            女士姓名
+          </td>
+          <td
+            style="width: 110px; padding-left: 8px; font-weight: 400; font-size: 12px;"
+          >
+            <span
+              contenteditable="false"
+              class="print-insert-field"
+              data-value="customerInfo.name"
+              data-name="姓名"
+              >{{customerInfo.name}}</span
+            >
+          </td>
+          <td style="width: 80px; font-size: 12px; padding-left: 8px;">电话</td>
+          <td
+            style="width: 110px; padding-left: 8px; font-weight: 400; font-size: 12px;"
+          >
+            <span
+              contenteditable="false"
+              class="print-insert-field"
+              data-value="customerInfo.phone"
+              data-name="手机"
+              >{{customerInfo.phone}}</span
+            >
+          </td>
+          <td style="width: 80px; font-size: 12px; padding-left: 8px;">微信</td>
+          <td>
+            <span
+              contenteditable="false"
+              class="print-insert-field"
+              data-value="customerInfo.wechatInfo"
+              data-name="微信"
+              >{{customerInfo.wechatInfo}}</span
+            >
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 80px; font-size: 12px; padding-left: 8px;">
+            先生姓名
+          </td>
+          <td
+            style="width: 110px; padding-left: 8px; font-weight: 400; font-size: 12px;"
+          >
+            <span
+              contenteditable="false"
+              class="print-insert-field"
+              data-value="customerInfo.partnerName"
+              data-name="姓名2"
+              >{{customerInfo.partnerName}}</span
+            >
+          </td>
+          <td style="width: 80px; font-size: 12px; padding-left: 8px;">电话</td>
+          <td
+            style="width: 110px; padding-left: 8px; font-weight: 400; font-size: 12px;"
+          >
+            <span
+              contenteditable="false"
+              class="print-insert-field"
+              data-value="customerInfo.partnerPhone"
+              data-name="手机2"
+              >{{customerInfo.partnerPhone}}</span
+            >
+          </td>
+          <td style="width: 80px; font-size: 12px; padding-left: 8px;">微信</td>
+          <td>
+            <span
+              contenteditable="false"
+              class="print-insert-field"
+              data-value="customerInfo.partnerWechat"
+              data-name="微信2"
+              >{{customerInfo.partnerWechat}}</span
+            >
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 80px; font-size: 12px; padding-left: 8px;">
+            档期-服务地点
+          </td>
+          <td colspan="5">
+            <span
+              contenteditable="false"
+              class="print-insert-field"
+              data-value="agendaInfoList.serviceAddressName"
+              data-name="档期-服务地点"
+              >{{agendaInfoList.serviceAddressName}}</span
+            >
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 80px; font-size: 12px; padding-left: 8px;">
+            服务日期
+          </td>
+          <td
+            style="width: 110px; padding-left: 8px; font-weight: 400; font-size: 12px;"
+          >
+            <span
+              contenteditable="false"
+              class="print-insert-field"
+              data-value="agendaInfoList.serviceDate"
+              data-name="档期-服务日期"
+              >{{agendaInfoList.serviceDate}}</span
+            >
+          </td>
+          <td style="width: 80px; font-size: 12px; padding-left: 8px;">
+            签单人
+          </td>
+          <td
+            style="width: 110px; padding-left: 8px; font-weight: 400; font-size: 12px;"
+          >
+            <span
+              contenteditable="false"
+              class="print-insert-field"
+              data-value="employeeInfo.name"
+              data-name="签单人"
+              >{{employeeInfo.name}}</span
+            >
+          </td>
+          <td style="width: 80px; font-size: 12px; padding-left: 8px;">
+            签单日期
+          </td>
+          <td>
+            <span
+              contenteditable="false"
+              class="print-insert-field"
+              data-value="orderInfo.createdAt"
+              data-name="签单日期"
+              >{{orderInfo.createdAt}}</span
+            >
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 80px; font-size: 12px; padding-left: 8px;">
+            订单金额
+          </td>
+          <td
+            style="width: 110px; padding-left: 8px; font-weight: 400; font-size: 12px;"
+          >
+            <span
+              contenteditable="false"
+              class="print-insert-field"
+              data-value="orderInfo.totalPrice"
+              data-name="订单总金额"
+              >{{orderInfo.totalPrice}}</span
+            >
+          </td>
+          <td style="width: 80px; font-size: 12px; padding-left: 8px;">
+            预付定金
+          </td>
+          <td
+            style="width: 110px; padding-left: 8px; font-weight: 400; font-size: 12px;"
+          >
+            <span
+              contenteditable="false"
+              class="print-insert-field"
+              data-value="orderInfo.paid"
+              data-name="已收金额"
+              >{{orderInfo.paid}}</span
+            >
+          </td>
+          <td style="width: 80px; font-size: 12px; padding-left: 8px;">
+            待收尾款
+          </td>
+          <td
+            style="width: 110px; padding-left: 8px; font-weight: 400; font-size: 12px;"
+          >
+            <span
+              contenteditable="false"
+              class="print-insert-field"
+              data-value="orderInfo.surplusAmount"
+              data-name="待收金额"
+              >{{orderInfo.surplusAmount}}</span
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table style="width: 100%;">
+      <tbody>
+        <tr class="firstRow">
+          <td
+            style="height: 22px; line-height: 22px; background: rgb(240, 240, 240); font-weight: bold;"
+          >
+            <span
+              contenteditable="false"
+              class="print-insert-field"
+              data-value="orderInfo.packageTypeTemplateInfo.name-orderInfo.packageInfo.name"
+              data-name="业务类型-套系名称"
+              >{{orderInfo.packageTypeTemplateInfo.name}}-{{orderInfo.packageInfo.name}}</span
+            >
+          </td>
+        </tr>
+        <tr>
+          <td
+            valign="top"
+            style="font-weight: 400; line-height: 20px;  white-space: pre-wrap;"
+          >
+            <div
+              contenteditable="false"
+              class="print-insert-field"
+              data-value="orderInfo.packageInfo.content-orderInfo.packageInfo.products"
+              data-name="套系内容"
+            >
+              {{orderInfo.packageInfo.content}}{{orderInfo.packageInfo.products}}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table style="width: 100%;">
+      <tbody>
+        <tr class="firstRow">
+          <td
+            style="height: 22px; line-height: 22px; background: rgb(240, 240, 240); font-weight: bold;"
+          >
+            备注
+          </td>
+        </tr>
+        <tr>
+          <td
+            valign="top"
+            style="font-weight: 400; line-height: 20px;  white-space: pre-wrap;"
+          >
+            <span
+              contenteditable="false"
+              class="print-insert-field"
+              data-value="orderInfo.comment"
+              data-name="合同备注"
+              >{{orderInfo.comment}}</span
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table style="width: 100%;">
+      <tbody>
+        <tr class="firstRow">
+          <td
+            style="height: 22px; line-height: 22px; background: rgb(240, 240, 240); font-weight: bold;"
+          >
+            补充合同
+          </td>
+        </tr>
+        <tr>
+          <td
+            valign="top"
+            style="font-weight: 400; line-height: 20px; height: 20px; white-space: pre-wrap;"
+          >
+            <span
+              contenteditable="false"
+              class="print-insert-field"
+              data-value="orderAppendInfoList"
+              data-name="补充合同"
+              >{{orderAppendInfoList}}</span
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table style="width: 100%;">
+      <tbody>
+        <tr class="firstRow">
+          <td
+            style="height: 22px; line-height: 22px; background: rgb(240, 240, 240); font-weight: bold;"
+          >
+            顾客须知
+          </td>
+        </tr>
+        <tr>
+          <td
+            valign="top"
+            style="font-weight: 400; line-height: 20px; height: 100px; white-space: pre-wrap;"
+          >
+            <p>
+              1、由于一方原因给另一方或第三方造成人身伤害或财产损失的，应承担赔偿责任。
+            </p>
+            <p>
+              2、因自身原因，一方于婚礼仪式前60日（含60日）以外，要求取消具体服务项目的，应以该项目服务费的___%作为违约金。于婚礼仪式前60日内（不含60日）要求取消具体服务项目的，应以该项目服务费的___%作为违约金。
+            </p>
+            <p>
+              3、乙方因不可抗力的意外事件未能按时履行协议(如发生交通事故或交通阻塞或主持人生病等原因)双方协商解决相关事宜,并及时采取补救措施,以保证婚礼如期举行。
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div
+      class="print-footer"
+      style="text-align: right; float: right; margin-top: 24px;"
+    >
+      <div style="display: inline-block; width: 160px; text-align: left;">
+        顾客签字：
+      </div>
+      <div style="display: inline-block; width: 160px; text-align: left;">
+        日期：
+      </div>
+    </div>
+  </body>
+</html>

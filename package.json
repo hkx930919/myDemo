@@ -1,13 +1,12 @@
 {
   "name": "mydemo",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "file": "node ./scripts/createJsFile.js"
   },
-  "author": "",
+  "author": "jin_gang <jin_gang@hunliji.com>",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^5.12.1",
@@ -25,5 +24,15 @@
     "glob": "^7.1.4",
     "inquirer": "^7.0.0",
     "moment": "^2.24.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hkx930919/myDemo.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/hkx930919/myDemo/issues"
+  },
+  "homepage": "https://github.com/hkx930919/myDemo#readme",
+  "description": ""
 }

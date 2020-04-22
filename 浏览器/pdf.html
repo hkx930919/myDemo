@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      @page {
+        margin: 0.5cm 1cm 1cm;
+        size: A4 portrait;
+      }
+
+      body {
+        font-size: 12px;
+      }
+
+      .attachment {
+        page-break-before: always;
+        margin-top: 50px;
+        color: transparent;
+      }
+
+      .print-container {
+        display: block;
+        padding: 16px 0;
+        font-size: 12px;
+      }
+
+      .print-container,
+      .print-insert-field,
+      td,
+      th {
+        white-space: pre-wrap !important;
+      }
+
+      .page-break {
+        display: block;
+        page-break-before: always;
+        margin-bottom: 40px;
+        color: transparent;
+      }
+
+      .page-break.not-break {
+        page-break-before: avoid;
+      }
+
+      .print-header {
+        width: 100%;
+      }
+
+      .print-insert-field {
+        color: #000 !important;
+      }
+
+      .selectTdClass {
+        background-color: #edf5fa !important;
+      }
+
+      table.noBorderTable td,
+      table.noBorderTable th,
+      table.noBorderTable caption {
+        border: 1px dashed #ddd !important;
+      }
+
+      table {
+        width: 100%;
+        margin-bottom: 10px;
+        border-collapse: collapse;
+        display: table;
+      }
+
+      td,
+      th {
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        border-collapse: collapse;
+      }
+
+      caption {
+        border: 1px dashed #ddd;
+        border-bottom: 0;
+        padding: 3px;
+        text-align: center;
+      }
+
+      th {
+        border-top: 1px solid #bbb;
+        background-color: #f7f7f7;
+      }
+
+      table tr.firstRow th {
+        border-top-width: 2px;
+      }
+
+      .ue-table-interlace-color-single {
+        background-color: #fcfcfc;
+      }
+
+      .ue-table-interlace-color-double {
+        background-color: #f7faff;
+      }
+
+      td p {
+        margin: 0;
+        padding: 0;
+      }
+
+      @media print {
+        @page {
+          margin: 0.5cm 1cm 1cm;
+          size: A4 portrait;
+        }
+
+        .page-break {
+          display: inline-block;
+          page-break-before: always;
+          margin-bottom: 40px;
+          color: transparent;
+          position: relative;
+        }
+
+        .attachment {
+          page-break-before: always;
+          margin-top: 50px;
+          color: transparent;
+        }
+
+        .print-container {
+          margin: 3.7cm 2.6cm 3.5cm;
+          font-size: 12px;
+          word-break: break-all;
+          white-space: pre-wrap;
+        }
+
+        .print-header {
+          background-color: #fff;
+          z-index: 1;
+          width: 100%;
+          position: fixed;
+          top: 0;
+        }
+
+        /*
+  .print-footer {
+    background-color: #fff;
+    z-index: 1;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+  }
+  */
+        .selectTdClass {
+          background-color: #edf5fa !important;
+        }
+
+        table.noBorderTable td,
+        table.noBorderTable th,
+        table.noBorderTable caption {
+          border: 1px dashed #ddd !important;
+        }
+
+        table {
+          word-break: break-all;
+          font-size: 12px;
+          width: 100%;
+          margin-bottom: 10px;
+          border-collapse: collapse;
+          display: table;
+        }
+
+        td,
+        th {
+          padding: 5px 10px;
+          border: 1px solid #ddd;
+          border-collapse: collapse;
+          white-space: pre-wrap !important;
+        }
+
+        caption {
+          border: 1px dashed #ddd;
+          border-bottom: 0;
+          padding: 3px;
+          text-align: center;
+        }
+
+        th {
+          border-top: 1px solid #bbb;
+          background-color: #f7f7f7;
+        }
+
+        table tr.firstRow th {
+          border-top-width: 2px;
+        }
+
+        .ue-table-interlace-color-single {
+          background-color: #fcfcfc;
+        }
+
+        .ue-table-interlace-color-double {
+          background-color: #f7faff;
+        }
+
+        td p {
+          margin: 0;
+          padding: 0;
+        }
+      }
+
+      #PrintOrderContainer {
+        word-break: break-all;
+        white-space: pre-wrap;
+      }
+
+      td,
+      th {
+        white-space: pre-wrap !important;
+      }
+
+      .print-container {
+        display: block;
+        padding: 16px 0;
+        font-size: 12px;
+      }
+
+      .page-break {
+        display: block;
+        page-break-before: always;
+        margin-bottom: 40px;
+        color: transparent;
+      }
+
+      .page-break.not-break {
+        page-break-before: avoid;
+      }
+
+      .print-header {
+        width: 100%;
+      }
+
+      .print-insert-field {
+        color: #000 !important;
+      }
+
+      .selectTdClass {
+        background-color: #edf5fa !important;
+      }
+
+      table.noBorderTable td,
+      table.noBorderTable th,
+      table.noBorderTable caption {
+        border: 1px dashed #ddd !important;
+      }
+
+      table {
+        width: 100%;
+        margin-bottom: 10px;
+        border-collapse: collapse;
+        display: table;
+      }
+
+      td,
+      th {
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        border-collapse: collapse;
+      }
+
+      caption {
+        border: 1px dashed #ddd;
+        border-bottom: 0;
+        padding: 3px;
+        text-align: center;
+      }
+
+      th {
+        border-top: 1px solid #bbb;
+        background-color: #f7f7f7;
+      }
+
+      table tr.firstRow th {
+        border-top-width: 2px;
+      }
+
+      .ue-table-interlace-color-single {
+        background-color: #fcfcfc;
+      }
+
+      .ue-table-interlace-color-double {
+        background-color: #f7faff;
+      }
+
+      td p {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+   <div class="print-header"><div style="font-size: 12px; padding: 2px 0px 10px; display: flex; align-items: center; justify-content: space-between;"><div><span contenteditable="false" class="print-insert-field" data-value="corporationVO.name" data-name="企业名称">测试魔镜23-379776</span></div><div style="text-align: right;">No.<span contenteditable="false" class="print-insert-field" data-value="orderInfo.id" data-name="订单ID">232481</span></div></div><div style="height: 2px; background: rgb(153, 153, 153); margin-bottom: 2px;"></div><div style="height: 1px; background: rgb(153, 153, 153);"></div></div><p class="print-title" style="text-align: center; font-weight: bold; font-size: 20px; margin: 16px 0px;">自定义标题</p><table style="width: 100%; margin-bottom: 16px;"><tbody><tr><td style="width: 80px; font-size: 12px; padding-left: 8px;">先生姓名</td><td style="width: 110px; padding-left: 8px; font-weight: 400; font-size: 12px;"><span contenteditable="false" class="print-insert-field" data-value="customerInfo.name" data-name="姓名">1111</span></td><td style="width: 80px; font-size: 12px; padding-left: 8px;">电话</td><td style="width: 110px; padding-left: 8px; font-weight: 400; font-size: 12px;"><span contenteditable="false" class="print-insert-field" data-value="customerInfo.phone" data-name="手机">13732947406</span></td><td style="width: 80px; font-size: 12px; padding-left: 8px;">微信</td><td><span contenteditable="false" class="print-insert-field" data-value="customerInfo.wechatInfo" data-name="微信"></span></td></tr><tr><td style="width: 80px; font-size: 12px; padding-left: 8px;">女士姓名</td><td style="width: 110px; padding-left: 8px; font-weight: 400; font-size: 12px;"><span contenteditable="false" class="print-insert-field" data-value="customerInfo.partnerName" data-name="姓名2"></span></td><td style="width: 80px; font-size: 12px; padding-left: 8px;">电话</td><td style="width: 110px; padding-left: 8px; font-weight: 400; font-size: 12px;"><span contenteditable="false" class="print-insert-field" data-value="customerInfo.partnerPhone" data-name="手机2"></span></td><td style="width: 80px; font-size: 12px; padding-left: 8px;">微信</td><td><span contenteditable="false" class="print-insert-field" data-value="customerInfo.partnerWechat" data-name="微信2">111</span></td></tr><tr><td style="width: 80px; font-size: 12px; padding-left: 8px;">地址</td><td colspan="5"><span contenteditable="false" class="print-insert-field" data-value="customerInfo.address" data-name="地址">111</span></td></tr><tr><td style="width: 80px; font-size: 12px; padding-left: 8px;">服务日期</td><td style="width: 110px; padding-left: 8px; font-weight: 400; font-size: 12px;"><span contenteditable="false" class="print-insert-field" data-value="agendaInfoList.serviceDate" data-name="档期-服务日期"></span></td><td style="width: 80px; font-size: 12px; padding-left: 8px;">签单人</td><td style="width: 110px; padding-left: 8px; font-weight: 400; font-size: 12px;"><span contenteditable="false" class="print-insert-field" data-value="employeeInfo.name" data-name="签单人">金刚</span></td><td style="width: 80px; font-size: 12px; padding-left: 8px;">签单日期</td><td><span contenteditable="false" class="print-insert-field" data-value="orderInfo.createdAt" data-name="签单日期">2020.03.25</span></td></tr><tr><td style="width: 80px; font-size: 12px; padding-left: 8px;">订单金额</td><td style="width: 110px; padding-left: 8px; font-weight: 400; font-size: 12px;"><span contenteditable="false" class="print-insert-field" data-value="orderInfo.totalPrice" data-name="订单总金额">1000.00元</span></td><td style="width: 80px; font-size: 12px; padding-left: 8px;">预付定金</td><td style="width: 110px; padding-left: 8px; font-weight: 400; font-size: 12px;"><span contenteditable="false" class="print-insert-field" data-value="orderInfo.paid" data-name="已收金额">0.00元</span></td><td style="width: 80px; font-size: 12px; padding-left: 8px;">待收尾款</td><td style="width: 110px; padding-left: 8px; font-weight: 400; font-size: 12px;"><span contenteditable="false" class="print-insert-field" data-value="orderInfo.surplusAmount" data-name="待收金额">1000.00元</span></td></tr></tbody></table><table style="width: 100%;"><tbody><tr><td style="height: 22px; line-height: 22px; background: rgb(240, 240, 240); font-weight: bold;"><span contenteditable="false" class="print-insert-field" data-value="orderInfo.packageTypeTemplateInfo.name-orderInfo.packageInfo.name" data-name="业务类型-套系名称">H5拍摄套系-测试档期</span></td></tr><tr><td valign="top" style="font-weight: 400; line-height: 20px; height: 100px; white-space: pre-wrap;"><div contenteditable="false" class="print-insert-field" data-value="orderInfo.packageInfo.content-orderInfo.packageInfo.products" data-name="套系内容">拍摄路线: 第一天：【乐天拍摄】
+
+拍摄线路：A+B+C+D+E（全部都拍摄）
+A:  豪华游艇拍摄
+B：海天一线主题拍摄
+C：网红水晶泳池主题+海边180度教堂+海边草坪婚礼
+D：环海礁石+观海长廊情人桥+爱情花海（视季节） +韩式小清新自行车 +碧海蓝天+椰梦+热带植物+18公里会唱歌的海岸+私人沙滩+蔚蓝海岸+浪漫主题、爱情旋律、挪威森林、沙滩情缘、踏浪听海、北纬18度的夏+阳光海岸+梦幻夕阳
+E:唯美10米飘纱+夕阳（试当天天气而定）
+（以上场景根据服装搭配景点，景点具有季节性请根据喜好选择无法做到一一拍摄）
+
+
+第二天：【水仙子+内景主题】或【微电影拍摄】二选一
+
+水仙子主题+内景拍摄+水晶船主题+泳池火焰鸟主题+水上漂浮主题（主题图片咨询客服查看）
+【微电影拍摄】
+专业导演1v1编剧 试镜 彩排服务，专业影视化妆师1v1贴心跟妆服务，专业摄像师1v1创意拍摄服务，后期电影配乐师1v1服务
+ 拍摄器材：采用国外先进全画幅摄影机高清摄制，专业相机配套镜头组，专业摄像小滑轨，专业级便携式斯坦尼康，专业三脚架，专业级摄像摇臂，专业电影录音设备(含录音指导)
+
+外景费用：外景拍摄所产生车费、景点门票费用、用餐费用由商家承担
+服装造型：全场服装任选，提供男士7套/人，女士7套/人，可自带一套便装计入总数内
+化妆造型：提供妆面7次/人，造型7组/人
+造型用品：不免费提供隐形内衣，如需，店内收费100元/件，可自带
+服务人员：摄影师1名+化妆师1名+助理1名
+拍摄精修：拍摄至少260张，精60张. 所有产品制作均在精修片里挑选！
+底片赠送：赠送全部JPG格式底片；赠送方式：自带U盘拷走
+第二天：【水仙子+内景主题】或【微电影拍摄】二选一
+
+水仙子主题+内景拍摄+水晶船主题+泳池火焰鸟主题+水上漂浮主题（主题图片咨询客服查看）
+【微电影拍摄】
+专业导演1v1编剧 试镜 彩排服务，专业影视化妆师1v1贴心跟妆服务，专业摄像师1v1创意拍摄服务，后期电影配乐师1v1服务
+ 拍摄器材：采用国外先进全画幅摄影机高清摄制，专业相机配套镜头组，专业摄像小滑轨，专业级便携式斯坦尼康，专业三脚架，专业级摄像摇臂，专业电影录音设备(含录音指导)
+
+外景费用：外景拍摄所产生车费、景点门票费用、用餐费用由商家承担
+服装造型：全场服装任选，提供男士7套/人，女士7套/人，可自带一套便装计入总数内
+化妆造型：提供妆面7次/人，造型7组/人
+造型用品：不免费提供隐形内衣，如需，店内收费100元/件，可自带
+服务人员：摄影师1名+化妆师1名+助理1名
+拍摄精修：拍摄至少260张，精60张. 所有产品制作均在精修片里挑选！
+底片赠送：赠送全部JPG格式底片；赠送方式：自带U盘拷走<p><strong>23132*1：</strong></p><p><strong>1321321321*2：</strong></p><p><strong>3D电子音乐相册1个*1：</strong></p><p><strong>赠送7寸精美放大照片1幅*1：</strong></p><p><strong>赠送8寸精美放大照片1幅1*1：</strong></p><p><strong>赠送10寸精美放大照片1幅*1：</strong></p><p><strong>赠送10寸精美水晶摆台一座*1：</strong></p><p><strong>赠送12寸精美放大照片1幅*1：</strong></p><p><strong>赠送12寸精美水晶摆台一座*1：</strong></p><p><strong>赠送8寸精美放大照片1幅*1：</strong></p><p><strong>赠送8寸精美蝶祈相框一座*1：</strong></p><p><strong>赠送24寸精美放大照片1副，防水防潮处理*1：</strong></p><p><strong>赠送42寸精美放大照片1副，防水防潮处理*1：</strong></p><p><strong>赠送42寸精品蝶祈相框工艺制作一幅*1：</strong></p><p><strong>16x12英寸高清数码输出制作内页1本*1：</strong></p><p><strong>16英寸贵族琉璃水晶册1本（10P）*1：</strong></p><p><strong>36x18英寸无缝跨页*1：</strong></p></div></td></tr></tbody></table><table style="width: 100%;"><tbody><tr><td style="height: 22px; line-height: 22px; background: rgb(240, 240, 240); font-weight: bold;">备注</td></tr><tr><td valign="top" style="font-weight: 400; line-height: 20px; height: 50px; white-space: pre-wrap;"><span contenteditable="false" class="print-insert-field" data-value="orderInfo.comment" data-name="合同备注">合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注合同备注</span></td></tr></tbody></table><table style="width: 100%;"><tbody><tr><td style="height: 22px; line-height: 22px; background: rgb(240, 240, 240); font-weight: bold;">补充合同</td></tr><tr><td valign="top" style="font-weight: 400; line-height: 20px; height: 20px; white-space: pre-wrap;"><span contenteditable="false" class="print-insert-field" data-value="orderAppendInfoList" data-name="补充合同">补充合同信息见附件</span></td></tr></tbody></table><table style="width: 100%;"><tbody><tr><td style="height: 22px; line-height: 22px; background: rgb(240, 240, 240); font-weight: bold;">顾客须知</td></tr><tr><td valign="top" style="font-weight: 400; line-height: 20px; height: 100px; white-space: pre-wrap;"><p>1、预约定金概不退还，如有特殊情况可转让或改套系，拍摄当天请付清余款，否则会影响后续服务。</p><p>2、合同内服务项目不另外收费，超出部分属自愿消费项目，按我司标价另外收费。</p><p>3、严禁拍摄当日临时改期，如需改期至少提前三天通知甲方，否则以扣除原套系价格的30%作为我司损失补偿。
+
+
+
+
+
+</p><p>   4、照片成品通知取件后甲方保存60天，逾期我司不负责保管责任，取件时请当面点清，有问题请及时与我们沟通解决。</p><p>5、对拍摄服务过程中，有任何意见及特殊要求请及时与我们沟通，可准备图片等资料作为参考，如无说明视为常规拍摄制作。</p><p>6、我司如不可控因素(相机内存卡损坏等)导致图片丢失或损坏，将免费为乙方重新拍摄一套作为补偿。</p><p>7、所有活动外特殊优惠均以订单内容为准，口头承诺无效。</p></td></tr></tbody></table><div class="print-footer" style="text-align: right; float: right; margin-top: 24px;"><div style="display: inline-block; width: 160px; text-align: left;">顾客签字：</div><div style="display: inline-block; width: 160px; text-align: left;">日期：</div></div
+  </body>
+</html>
