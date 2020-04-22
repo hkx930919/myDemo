@@ -1,56 +1,522 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>合同模板</title>
+    <style>
+      @media print {
+        @page {
+          margin: 0.5cm 1cm 1cm;
+          size: A4 portrait;
+        }
+
+        table,
+        tr,
+        th,
+        p {
+          box-sizing: border-box;
+        }
+
+        .page-break {
+          display: inline-block;
+          page-break-before: always;
+          margin-bottom: 40px;
+          color: transparent;
+          position: relative;
+        }
+
+        .attachment {
+          page-break-before: always;
+          margin-top: 50px;
+          color: transparent;
+        }
+
+        .print-header {
+          background-color: #fff;
+          z-index: 1;
+          width: 100%;
+          position: fixed;
+          top: 0;
+        }
+
+        .selectTdClass {
+          background-color: #edf5fa !important;
+        }
+
+        table.noBorderTable td,
+        table.noBorderTable th,
+        table.noBorderTable caption {
+          border: 1px dashed #ddd !important;
+        }
+
+        table {
+          word-break: break-all;
+          font-size: 12px;
+          width: 100%;
+          margin-bottom: 10px;
+          border-collapse: collapse;
+          display: table;
+        }
+
+        td,
+        th {
+          padding: 5px 10px;
+          border: 1px solid #ddd;
+          border-collapse: collapse;
+          white-space: pre-wrap !important;
+        }
+
+        caption {
+          border: 1px dashed #ddd;
+          border-bottom: 0;
+          padding: 3px;
+          text-align: center;
+        }
+
+        th {
+          border-top: 1px solid #bbb;
+          background-color: #f7f7f7;
+        }
+
+        table tr.firstRow th {
+          border-top-width: 2px;
+        }
+
+        .ue-table-interlace-color-single {
+          background-color: #fcfcfc;
+        }
+
+        .ue-table-interlace-color-double {
+          background-color: #f7faff;
+        }
+
+        td p {
+          margin: 0;
+          padding: 0;
+        }
+      }
+
+      .print-container,
+      .print-insert-field,
+      td,
+      th {
+        white-space: pre-wrap !important;
+      }
+
+      .page-break {
+        display: block;
+        page-break-before: always;
+        margin-bottom: 40px;
+        color: transparent;
+      }
+
+      .page-break.not-break {
+        page-break-before: avoid;
+      }
+
+      .print-header {
+        width: 100%;
+      }
+
+      .print-insert-field {
+        color: #000 !important;
+      }
+
+      .selectTdClass {
+        background-color: #edf5fa !important;
+      }
+
+      table.noBorderTable td,
+      table.noBorderTable th,
+      table.noBorderTable caption {
+        border: 1px dashed #ddd !important;
+      }
+
+      table {
+        width: 100%;
+        margin-bottom: 10px;
+        border-collapse: collapse;
+        display: table;
+      }
+
+      td,
+      th {
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        border-collapse: collapse;
+      }
+
+      caption {
+        border: 1px dashed #ddd;
+        border-bottom: 0;
+        padding: 3px;
+        text-align: center;
+      }
+
+      th {
+        border-top: 1px solid #bbb;
+        background-color: #f7f7f7;
+      }
+
+      table tr.firstRow th {
+        border-top-width: 2px;
+      }
+
+      .ue-table-interlace-color-single {
+        background-color: #fcfcfc;
+      }
+
+      .ue-table-interlace-color-double {
+        background-color: #f7faff;
+      }
+
+      td p {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
   </head>
+
   <body>
-    <p>
-      视频
-    </p>
-
-    src="https://static.hunliji.com/vr-scene-6.mp4"
-
-    <video
-      src="https://static.hunliji.com/vr-scene-8-site.mpg"
-      class=""
-      initial-time="0"
-      autoplay="false"
-      loop="false"
-      muted="false"
-      direction="0"
-      bindplay=""
-      bindpause=""
-      bindended=""
-      bindtimeupdate=""
-      bindwaiting=""
-      binderror=""
-    ></video>
+    <div
+      class="print-container"
+      style="overflow: hidden; margin: 0px; box-sizing: border-box;"
+    >
+      <div
+        class="print-header"
+        style="font-size: 15px; color: rgb(0, 0, 0); border-bottom: 1px solid; padding: 10px 0px;"
+      >
+        <div style="text-align: start;">
+          <span
+            contenteditable="false"
+            data-value="corporationVO.name"
+            data-name="企业名称"
+            class="print-insert-field"
+          >
+            一休创建企业-海草云快速体验
+          </span>
+          <br />
+        </div>
+        <div style="display: inline-block; width: 49%; text-align: right;">
+          <span
+            contenteditable="false"
+            class="print-insert-field"
+            data-value="orderInfo.id"
+            data-name="订单ID"
+          >
+            232354
+          </span>
+        </div>
+      </div>
+      <h2
+        style="text-align: center; font-weight: bold; font-size: 20px; margin: 30px 0px;"
+      >
+        自定义标题
+      </h2>
+      <table style="width: 100%; margin-bottom: 16px;">
+        <tbody>
+          <tr class="firstRow">
+            <td
+              style="width: 80px; color: rgb(102, 102, 102); font-size: 12px; padding-left: 8px;"
+            >
+              先生姓名
+            </td>
+            <td
+              style="width: 110px; padding-left: 8px; font-weight: 400; color: rgb(0, 0, 0); font-size: 12px;"
+            >
+              <span
+                contenteditable="false"
+                class="print-insert-field"
+                data-value="customerInfo.name"
+                data-name="姓名"
+              >
+                1
+              </span>
+            </td>
+            <td
+              style="width: 80px; color: rgb(102, 102, 102); font-size: 12px; padding-left: 8px;"
+            >
+              电话
+            </td>
+            <td
+              style="width: 110px; padding-left: 8px; font-weight: 400; color: rgb(0, 0, 0); font-size: 12px;"
+            >
+              <span
+                contenteditable="false"
+                class="print-insert-field"
+                data-value="customerInfo.phone"
+                data-name="手机"
+              >
+                B=BPBPPBBPP
+              </span>
+            </td>
+            <td
+              style="width: 80px; color: rgb(102, 102, 102); font-size: 12px; padding-left: 8px;"
+            >
+              微信
+            </td>
+            <td>
+              <span
+                contenteditable="false"
+                class="print-insert-field"
+                data-value="customerInfo.wechatInfo"
+                data-name="微信"
+              >
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="width: 80px; color: rgb(102, 102, 102); font-size: 12px; padding-left: 8px;"
+            >
+              女士姓名
+            </td>
+            <td
+              style="width: 110px; padding-left: 8px; font-weight: 400; color: rgb(0, 0, 0); font-size: 12px;"
+            >
+              <span
+                contenteditable="false"
+                class="print-insert-field"
+                data-value="customerInfo.partnerName"
+                data-name="姓名2"
+              >
+              </span>
+            </td>
+            <td
+              style="width: 80px; color: rgb(102, 102, 102); font-size: 12px; padding-left: 8px;"
+            >
+              电话
+            </td>
+            <td
+              style="width: 110px; padding-left: 8px; font-weight: 400; color: rgb(0, 0, 0); font-size: 12px;"
+            >
+              <span
+                contenteditable="false"
+                class="print-insert-field"
+                data-value="customerInfo.partnerPhone"
+                data-name="手机2"
+              >
+              </span>
+            </td>
+            <td
+              style="width: 80px; color: rgb(102, 102, 102); font-size: 12px; padding-left: 8px;"
+            >
+              微信
+            </td>
+            <td>
+              <span
+                contenteditable="false"
+                class="print-insert-field"
+                data-value="customerInfo.partnerWechat"
+                data-name="微信2"
+              >
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="width: 80px; color: rgb(102, 102, 102); font-size: 12px; padding-left: 8px;"
+            >
+              地址
+            </td>
+            <td colspan="5">
+              <span
+                contenteditable="false"
+                class="print-insert-field"
+                data-value="customerInfo.address"
+                data-name="地址"
+              >
+                杭州市西湖区数娱大厦十点多地对地导弹
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="width: 80px; color: rgb(102, 102, 102); font-size: 12px; padding-left: 8px;"
+            >
+              服务日期
+            </td>
+            <td
+              style="width: 110px; padding-left: 8px; font-weight: 400; color: rgb(0, 0, 0); font-size: 12px;"
+            >
+              <span
+                contenteditable="false"
+                class="print-insert-field"
+                data-value="agendaInfoList.serviceDate"
+                data-name="档期-服务日期"
+              >
+                2020.01.05 全天
+              </span>
+            </td>
+            <td
+              style="width: 80px; color: rgb(102, 102, 102); font-size: 12px; padding-left: 8px;"
+            >
+              签单人
+            </td>
+            <td
+              style="width: 110px; padding-left: 8px; font-weight: 400; color: rgb(0, 0, 0); font-size: 12px;"
+            >
+              <span
+                contenteditable="false"
+                class="print-insert-field"
+                data-value="employeeInfo.name"
+                data-name="签单人"
+              >
+                长乐
+              </span>
+            </td>
+            <td
+              style="width: 80px; color: rgb(102, 102, 102); font-size: 12px; padding-left: 8px;"
+            >
+              签单日期
+            </td>
+            <td>
+              <span
+                contenteditable="false"
+                class="print-insert-field"
+                data-value="orderInfo.createdAt"
+                data-name="签单日期"
+              >
+                2020.03.19
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="width: 80px; color: rgb(102, 102, 102); font-size: 12px; padding-left: 8px;"
+            >
+              订单金额
+            </td>
+            <td
+              style="width: 110px; padding-left: 8px; font-weight: 400; color: rgb(0, 0, 0); font-size: 12px;"
+            >
+              <span
+                contenteditable="false"
+                class="print-insert-field"
+                data-value="orderInfo.totalPrice"
+                data-name="订单总金额"
+              >
+                0.00元
+              </span>
+            </td>
+            <td
+              style="width: 80px; color: rgb(102, 102, 102); font-size: 12px; padding-left: 8px;"
+            >
+              预付定金
+            </td>
+            <td
+              style="width: 110px; padding-left: 8px; font-weight: 400; color: rgb(0, 0, 0); font-size: 12px;"
+            >
+              <span
+                contenteditable="false"
+                class="print-insert-field"
+                data-value="orderInfo.paid"
+                data-name="已收金额"
+              >
+                0.00元
+              </span>
+            </td>
+            <td
+              style="width: 80px; color: rgb(102, 102, 102); font-size: 12px; padding-left: 8px;"
+            >
+              待收尾款
+            </td>
+            <td
+              style="width: 110px; padding-left: 8px; font-weight: 400; color: rgb(0, 0, 0); font-size: 12px;"
+            >
+              <span
+                contenteditable="false"
+                class="print-insert-field"
+                data-value="orderInfo.surplusAmount"
+                data-name="待收金额"
+              >
+                0.00元
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table style="width: 100%;">
+        <tbody>
+          <tr class="firstRow">
+            <td
+              style="height: 22px; padding-left: 16px; line-height: 22px; background: rgb(240, 240, 240); font-weight: bold; color: rgb(51, 51, 51);"
+            >
+              <span
+                contenteditable="false"
+                class="print-insert-field"
+                data-value="orderInfo.packageInfo.name"
+                data-name="套系名称"
+              >
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td
+              valign="top"
+              style="font-weight: 400; color: rgb(0, 0, 0); line-height: 20px; min-height: 150px; white-space: pre-line; height: 100px;"
+            >
+              <span
+                contenteditable="false"
+                class="print-insert-field"
+                data-value="orderInfo.packageInfo.content-orderInfo.packageInfo.products"
+                data-name="套系内容"
+              >
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table style="width: 100%;">
+        <tbody>
+          <tr class="firstRow">
+            <td
+              style="height: 22px; padding-left: 16px; line-height: 22px; background: rgb(240, 240, 240); font-weight: bold; color: rgb(51, 51, 51);"
+            >
+              备注
+            </td>
+          </tr>
+          <tr>
+            <td
+              valign="top"
+              style="font-weight: 400; color: rgb(0, 0, 0); line-height: 20px; min-height: 150px; white-space: pre-line; height: 100px;"
+            >
+              <br />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table style="width: 100%;">
+        <tbody>
+          <tr class="firstRow">
+            <td
+              style="height: 22px; padding-left: 16px; line-height: 22px; background: rgb(240, 240, 240); font-weight: bold; color: rgb(51, 51, 51);"
+            >
+              顾客须知
+            </td>
+          </tr>
+          <tr>
+            <td
+              valign="top"
+              style="font-weight: 400; color: rgb(0, 0, 0); line-height: 20px; min-height: 150px; white-space: pre-line; height: 100px;"
+            >
+              <p>
+                顾客须知1
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="print-footer" style="text-align: right; float: right;">
+        <div style="display: inline-block; width: 200px; text-align: left;">
+          顾客签字：
+        </div>
+        <div style="display: inline-block; width: 200px; text-align: left;">
+          日期：
+        </div>
+      </div>
+    </div>
   </body>
-</html> -->
-
-<!DOCTYPE HTML>
-<html>
- <head>
-  <title> 测试视频播放</title>
-  <meta charset="utf-8">
- </head>
- <body>
-  <object id="MediaPlayer" classid="clsid:22D6F312-B0F6-11D0-94AB-0080C74C7E95" width="800" height="600" standby="Loading Windows Media Player components…" type="application/x-oleobject" codebase="http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=6,4,7,1112">
-    <param name="FileName" value="https://static.hunliji.com/vr-scene-8-site.mpg">
-    <param name="AutoStart" value="true">
-    <param name="ShowControls" value="true">
-    <param name="BufferingTime" value="2">
-    <param name="ShowStatusBar" value="true">
-    <param name="AutoSize" value="true">
-    <param name="InvokeURLs" value="false">
-    <param name="AnimationatStart" value="1">
-    <param name="TransparentatStart" value="1">
-    <param name="Loop" value="1">
-    <embed type="application/x-mplayer2" src="test.avi" name="MediaPlayer" autostart="1" showstatusbar="1" showdisplay="1" showcontrols="1" loop="0" videoborder3d="0" pluginspage="http://www.microsoft.com/Windows/MediaPlayer/" width="800" height="600"></embed>
-  </object>
-
- </body>
 </html>
