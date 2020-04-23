@@ -2,6 +2,8 @@ const webpackBaseConfig = require('./webpack.base')
 const merge = require('webpack-merge')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+
+const webpack = require('webpack')
 const cssnano = require('cssnano')
 module.exports = merge(webpackBaseConfig, {
   mode: 'production',
@@ -26,9 +28,10 @@ module.exports = merge(webpackBaseConfig, {
     ]
   },
   plugins: [
+    new webpack.HashedModuleIdsPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash].css',
-      chunkFilename: '[id].[contenthash].css'
+      filename: '[name].[contenthash].css',
+      chunkFilename: '[name].[contenthash].css'
     }),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
@@ -42,21 +45,28 @@ module.exports = merge(webpackBaseConfig, {
     })
   ],
   optimization: {
+    namedChunks: true,
     splitChunks: {
-      cacheGroups: {
-        cssCommon: {
-          chunks: 'all',
-          minChunks: 2,
-          test: module => {
-            const iscss = /\.(c|le)ss$/.test(module.resource)
-
-            console.log('===iscss', iscss)
-            console.log('--module', module.resource)
-
-            return iscss
-          }
-        }
-      }
+      //   cacheGroups: {
+      //     cssCommon: {
+      //       chunks: 'all',
+      //       minChunks: 2,
+      //       test: module => {
+      //         const iscss = /\.(c|le)ss$/.test(module.resource)
+      //         console.log('===iscss', iscss)
+      //         console.log('--module', module.resource)
+      //         return iscss
+      //       },
+      //       minSize: 0
+      //     },
+      //     common: {
+      //       chunks: 'all',
+      //       minChunks: 2,
+      //       minSize: 0,
+      //       test: /util.js$/
+      //       //   name: 'util'
+      //     }
+      //   }
     }
   }
 })

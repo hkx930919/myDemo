@@ -1,14 +1,21 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const path = require('path')
+const getEntryAndHtmlPluginWithMultiPage = require('./getEntryAndHtmlPluginWithMultiPage')
+
+const { entry, HtmlWebpackPlugins } = getEntryAndHtmlPluginWithMultiPage()
 module.exports = {
-  entry: {
-    app: './src/index/index.js',
-    search: './src/search/index.js'
-  },
+  //   entry: {
+  //     'index/index': './src/index/index.js',
+  //     'search/index': './src/search/index.js'
+  //   },
+  //   entry: './src/index/index.js',
+  entry,
+
   output: {
-    filename: '[name]_[chunkhash:8].js',
-    path: path.join(__dirname, './dist')
+    filename: '[name].js?[contenthash]',
+    path: path.join(__dirname, './dist'),
+    chunkFilename: `[name].js?[contenthash]`
   },
   module: {
     rules: [
@@ -29,5 +36,5 @@ module.exports = {
       }
     ]
   },
-  plugins: [new HtmlWebpackPlugin(), new CleanWebpackPlugin()]
+  plugins: [...HtmlWebpackPlugins, new CleanWebpackPlugin()]
 }
