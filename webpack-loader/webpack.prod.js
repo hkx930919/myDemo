@@ -6,6 +6,9 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const webpack = require('webpack')
 const cssnano = require('cssnano')
 module.exports = merge(webpackBaseConfig, {
+  output: {
+    publicPath: '../'
+  },
   mode: 'production',
   module: {
     rules: [
@@ -31,7 +34,7 @@ module.exports = merge(webpackBaseConfig, {
     new webpack.HashedModuleIdsPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
-      chunkFilename: '[name].[contenthash].css'
+      chunkFilename: './[name].[contenthash].css'
     }),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,

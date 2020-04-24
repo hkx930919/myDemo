@@ -3,8 +3,13 @@ const webpack = require('webpack')
 const webpackBaseConfig = require('./webpack.base')
 const merge = require('webpack-merge')
 module.exports = merge(webpackBaseConfig, {
+  mode: 'development',
+  output: {
+    filename: '[name].js',
+    chunkFilename: '[id].js',
+    publicPath: '/'
+  },
   module: {
-    mode: 'development',
     rules: [
       {
         test: /\.less$/,
