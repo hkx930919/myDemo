@@ -39,7 +39,10 @@ const getEntryAndHtmlPluginWithMultiPage = () => {
   }
   return data
 }
-
+/**
+ * @func 辅助css生成，开发环境补齐style-loader,生产环境补齐MiniCssExtractPlugin.loader
+ * @return loaders
+ */
 const generateCssLoader = function({ include, exclude, loaders, test }) {
   loaders = Array.isArray(loaders) ? loaders : [loaders]
   test = test || /\.css$/
