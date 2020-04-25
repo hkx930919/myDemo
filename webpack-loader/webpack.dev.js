@@ -1,33 +1,14 @@
+global.mode = 'start'
 const path = require('path')
 const webpack = require('webpack')
-const webpackBaseConfig = require('./webpack.base')
 const merge = require('webpack-merge')
+const webpackBaseConfig = require('./webpack.base')
 module.exports = merge(webpackBaseConfig, {
   mode: 'development',
   output: {
     filename: '[name].js',
     chunkFilename: '[id].js',
     publicPath: '/'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.less$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                localIdentName: '[path][name]__[local]--[hash:base64:5]',
-                auto: true
-              }
-            }
-          },
-          'less-loader'
-        ]
-      }
-    ]
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
   devServer: {
