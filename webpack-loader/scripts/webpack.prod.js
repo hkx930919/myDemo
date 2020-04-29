@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const webpack = require('webpack')
 const cssnano = require('cssnano')
-console.log('process.env PROD')
 module.exports = merge(webpackBaseConfig, {
   output: {
     publicPath: '../',
