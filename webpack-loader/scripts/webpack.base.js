@@ -20,7 +20,15 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: 'babel-loader'
+        loaders: [
+          'babel-loader',
+          {
+            loader: 'eslint-loader',
+            options: {
+              cache: true
+            }
+          }
+        ]
       },
       generateCssLoader({
         include: path.join(__dirname, '../src/'),
