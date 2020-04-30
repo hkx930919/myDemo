@@ -9,6 +9,7 @@ const {
 // eslint-disable-next-line import/no-dynamic-require
 const baseEnv = require(`../config/${process.env.BUILD_ENV}.env`)
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 const { entry, HtmlWebpackPlugins } = getEntryAndHtmlPluginWithMultiPage()
 module.exports = {
@@ -105,6 +106,7 @@ module.exports = {
       }
     ]
   },
+  stats: 'errors-only',
   plugins: [
     ...HtmlWebpackPlugins,
     new CleanWebpackPlugin(),
@@ -139,6 +141,7 @@ module.exports = {
       //   cwpOptions: {
       //     context: path.resolve(__dirname, 'bower_components')
       //   }
-    })
+    }),
+    new FriendlyErrorsWebpackPlugin()
   ]
 }
