@@ -6,6 +6,7 @@ const {
   generateCssLoader
 } = require('./util')
 
+// eslint-disable-next-line import/no-dynamic-require
 const baseEnv = require(`../config/${process.env.BUILD_ENV}.env`)
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin')
 
@@ -21,15 +22,16 @@ module.exports = {
       {
         test: /\.js$/,
         include: path.join(__dirname, '../src/'),
-        loaders: [
-          'babel-loader',
-          {
-            loader: 'eslint-loader',
-            options: {
-              cache: true
-            }
-          }
-        ]
+        loaders: ['babel-loader']
+      },
+      {
+        test: /\.(js|jsx|ts|tsx)$/,
+        loader: 'eslint-loader',
+        options: {
+          cache: true
+        },
+        enforce: 'pre',
+        include: path.join(__dirname, '../src/')
       },
       generateCssLoader({
         include: path.join(__dirname, '../src/'),

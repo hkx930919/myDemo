@@ -2,10 +2,9 @@
 // console.log('====largeNumber', largeNumber)
 import 'lib-flexible'
 import '../__base/index.module.less'
-import aStyles from '../__base/a.module.less'
-import aCssStyles from '../__base/a.module.css'
 import React from 'react'
 import ReactDom from 'react-dom'
+import aCssStyles from '../__base/a.module.css'
 
 console.log('process.env', process.env)
 console.log('process.env.BUILD_ENV', process.env.BUILD_ENV)
@@ -22,7 +21,5 @@ setTimeout(() => {
 // div.className = aCssStyles['a-flex']
 // document.body.append(div)
 
-const Comp = () => {
-  return <div className={aCssStyles['a-flex']}>我是一个div</div>
-}
+const Comp = () => <div className={aCssStyles['a-flex']}>我是一个div</div>
 ReactDom.render(<Comp />, document.getElementById('root'))

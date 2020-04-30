@@ -1,4 +1,6 @@
-console.log('test.js123')
 import '../__base/a.module.less'
-import { logAge } from '../__base/util.js'
+import { logAge } from '../__base/util'
+
+console.log('test.js123')
+
 logAge()
