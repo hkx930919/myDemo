@@ -4,14 +4,14 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   entry: {
-    'large-number': './src/index.js',
-    'large-number-min': './src/index.js'
+    'large-number': './src/index.js', // 非压缩版本
+    'large-number.min': './src/index.js' // 压缩版本
   },
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
-    library: 'largeNumber',
-    libraryTarget: 'umd'
+    library: 'largeNumber', // 指定库的全局变量
+    libraryTarget: 'umd' // 打包成umd，支持AMD/CJS/ESM
   },
   mode: 'none',
   module: {
@@ -23,10 +23,10 @@ module.exports = {
     ]
   },
   optimization: {
-    minimize: true,
+    minimize: true, // 开启压缩
     minimizer: [
       new TerserPlugin({
-        include: /\.min\.js$/
+        include: /\.min\.js$/ // 对.min.js文件进行压缩
       })
     ]
   },

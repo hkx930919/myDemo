@@ -19,12 +19,10 @@ const largeNumber = (numa, numb) => {
     }
     total = num + total
   }
+  if (t) {
+    total = t + total
+  }
   return total
 }
 
-console.log(
-  largeNumber(
-    '9000321111111111111111111111111111555555555555555555555555555',
-    '122'
-  )
-)
+console.log(largeNumber('987', '124'))
