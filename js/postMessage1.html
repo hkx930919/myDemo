@@ -1,54 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>postmessage</title>
-</head>
-<body>
-        otherWindow.postMessage(message, targetOrigin, [transfer]);
-        window.addEventListener('message')的事件对象中,data,,
-                                                data    从其他 window 中传递过来的对象数据。
-                                                origin  调用 postMessage  时消息发送方窗口的 origin
-                                                source  对发送消息的窗口对象的引用; 您可以使用此来在具有不同origin的两个窗口之间建立双向通信。
+  </head>
+  <body>
+    otherWindow.postMessage(message, targetOrigin, [transfer]);
+    window.addEventListener('message')的事件对象中,data,, data 从其他 window
+    中传递过来的对象数据。 origin 调用 postMessage 时消息发送方窗口的 origin
+    source 对发送消息的窗口对象的引用;
+    您可以使用此来在具有不同origin的两个窗口之间建立双向通信。
 
+    <!-- <script>
+      /*
+       * A窗口的域名是<http://example.com:8080>，以下是A窗口的script标签下的代码：
+       */
+
+      var popup = window.open('./postMessage2.html')
+
+      // 如果弹出框没有被阻止且加载完成
+
+      // 这行语句没有发送信息出去，即使假设当前页面没有改变location（因为targetOrigin设置不对）
+      popup.postMessage(
+        "The user is 'bob' and the password is 'secret'",
+        'https://secure.example.net'
+      )
+
+      // 假设当前页面没有改变location，这条语句会成功添加message到发送队列中去（targetOrigin设置对了）
+      popup.postMessage('hello there!', 'http://example.org')
+
+      function receiveMessage(event) {
+        // 我们能相信信息的发送者吗?  (也许这个发送者和我们最初打开的不是同一个页面).
+        if (event.origin !== 'http://example.org') return
+
+        // event.source 是我们通过window.open打开的弹出页面 popup
+        // event.data 是 popup发送给当前页面的消息 "hi there yourself!  the secret response is: rheeeeet!"
+      }
+      window.addEventListener('message', receiveMessage, false)
+    </!-->
+    <!-- <script>
+      for (var index = 0; index < 10; index++) {
+        setTimeout(console.log(index), 0)
+      }
+    </script> -->
+    <script src="./requestAnimationFrame.js"></script>
     <script>
-        /*
- * A窗口的域名是<http://example.com:8080>，以下是A窗口的script标签下的代码：
- */
+      console.log('mySetTimeOut', mySetTimeOut)
 
-var popup = window.open('./postMessage2.html');
+      // mySetTimeOut(() => {
+      //   console.log('1s后调用')
+      // }, 10)
+      let count = 0
+      mySetInterval(cancelTimer => {
+        console.log('1s后调用')
+        count++
+        console.log(count)
+        if (count > 3) {
+          console.log(count)
 
-// 如果弹出框没有被阻止且加载完成
-
-// 这行语句没有发送信息出去，即使假设当前页面没有改变location（因为targetOrigin设置不对）
-popup.postMessage("The user is 'bob' and the password is 'secret'",
-                  "https://secure.example.net");
-
-// 假设当前页面没有改变location，这条语句会成功添加message到发送队列中去（targetOrigin设置对了）
-popup.postMessage("hello there!", "http://example.org");
-
-function receiveMessage(event)
-{
-  // 我们能相信信息的发送者吗?  (也许这个发送者和我们最初打开的不是同一个页面).
-  if (event.origin !== "http://example.org")
-    return;
-
-  // event.source 是我们通过window.open打开的弹出页面 popup
-  // event.data 是 popup发送给当前页面的消息 "hi there yourself!  the secret response is: rheeeeet!"
-}
-window.addEventListener("message", receiveMessage, false);    
-    
-        
-    </script>
-    <script>
-        for (var index = 0; index <10; index++) {
-           setTimeout(
-               console.log(index)
-             , 0);
-            
+          cancelTimer()
+          mySetInterval(() => {
+            console.log('再次开启', count)
+          }, 1000)
         }
+      }, 1000)
     </script>
-</body>
+  </body>
 </html>

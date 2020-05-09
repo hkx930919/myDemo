@@ -1,24 +1,24 @@
 {
-    "name": "mocha",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "test": "mocha",
-        "test:all": "mocha --recursive",
-        "test:children": "mocha test/children/*.js",
-        "test:report": "mocha --recursive --reporter mochawesome",
-        "eslint": "eslint --init"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "chai": "^4.2.0",
-        "eslint": "^6.8.0",
-        "mocha": "^7.1.2"
-    },
-    "devDependencies": {
-        "mochawesome": "^6.1.1"
-    }
+  "name": "mocha",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "test:all": "mocha --recursive",
+    "test:children": "mocha test/children/*.js",
+    "test:report": "mocha --recursive --reporter mochawesome",
+    "eslint": "eslint --init"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^6.8.0",
+    "mocha": "^7.1.2"
+  },
+  "devDependencies": {
+    "mochawesome": "^6.1.1"
+  }
 }
