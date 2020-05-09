@@ -12,7 +12,8 @@
     "dev:prod": "cross-env BUILD_ENV=prod  webpack-dev-server --config scripts/webpack.dev.js --open",
     "build": "cross-env BUILD_ENV=prod  webpack --config scripts/webpack.prod.js",
     "build:dev": "cross-env BUILD_ENV=dev  webpack --config webpack.prod.js",
-    "build:pre": "cross-env BUILD_ENV=pre  webpack --config webpack.prod.js"
+    "build:pre": "cross-env BUILD_ENV=pre  webpack --config webpack.prod.js",
+    "commitmsg": "commitlint -E GIT_PARAMS"
   },
   "keywords": [],
   "author": "",
@@ -62,6 +63,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "@commitlint/config-conventional": "^8.3.4",
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "eslint-plugin-vue": "^6.2.2",
