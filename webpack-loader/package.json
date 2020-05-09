@@ -11,7 +11,7 @@
     "dev:prod": "cross-env BUILD_ENV=prod  webpack-dev-server --config scripts/webpack.dev.js --open",
     "build": "cross-env BUILD_ENV=prod  webpack --config scripts/webpack.prod.js",
     "build:dev": "cross-env BUILD_ENV=dev  webpack --config webpack.prod.js",
-    "build:pre": "cross-env BUILD_ENV=pre  webpack --config webpack.prod.js",
+    "build:pre": "cross-env BUILD_ENV=pre  webpack --config webpack.prod.js"
   },
   "keywords": [],
   "author": "",
