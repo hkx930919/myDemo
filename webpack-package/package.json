@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:unit": "mocha test/unit/*.js",
+    "test:smoke": "node ./test/smoke",
     "lint": "eslint src",
     "dev": "cross-env BUILD_ENV=dev  webpack-dev-server --config scripts/webpack.dev.js --open",
     "dev:pre": "cross-env BUILD_ENV=pre  webpack-dev-server --config scripts/webpack.dev.js --open",
