@@ -17,6 +17,7 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
-    'react/jsx-uses-react': 2
+    'react/jsx-uses-react': 2,
+    'global-require': 0
   }
 }
