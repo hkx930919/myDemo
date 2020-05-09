@@ -12,7 +12,6 @@
     "build": "cross-env BUILD_ENV=prod  webpack --config scripts/webpack.prod.js",
     "build:dev": "cross-env BUILD_ENV=dev  webpack --config webpack.prod.js",
     "build:pre": "cross-env BUILD_ENV=pre  webpack --config webpack.prod.js",
-    "commitmsg": "commitlint -E GIT_PARAMS"
   },
   "keywords": [],
   "author": "",
@@ -78,7 +77,8 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E $HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
