@@ -5,8 +5,6 @@ module.exports = {
       2,
       'always',
       [
-        'build',
-        'ci',
         'chore',
         'docs',
         'feat',
