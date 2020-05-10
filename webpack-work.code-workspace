@@ -1,0 +1,14 @@
+{
+    "folders": [
+		{
+			"path": "webpack-loader"
+		},
+		{
+			"path": "webpack-package"
+		},
+		{
+			"path": "mocha"
+		}
+	],
+    "settings": {}
+}
