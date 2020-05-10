@@ -4,6 +4,7 @@ const PATH_SRC = path.join(__dirname, '../src')
 const BLACK_LIST = ['base', '__base']
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
 const isStartMode = global.mode === 'start'
 
 const getEntryAndHtmlPluginWithMultiPage = () => {
@@ -60,4 +61,21 @@ const generateCssLoader = function({ include, exclude, loaders, test }) {
         ]
   }
 }
-module.exports = { getEntryAndHtmlPluginWithMultiPage, generateCssLoader }
+/**
+ * @func 使用peed-measure-webpack-plugin分析plugin和loader执行时间
+ * @param {object} config webpack配置文件
+ * @param {bool} isMeature 是否需要speed-measure-webpack-plugin包裹，默认为true
+ */
+const speedMeatureWebpack = (config, isMeature = true) => {
+  const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+  const smp = new SpeedMeasurePlugin()
+  if (isMeature) {
+    return smp.wrap(config)
+  }
+  return config
+}
+module.exports = {
+  getEntryAndHtmlPluginWithMultiPage,
+  generateCssLoader,
+  speedMeatureWebpack
+}

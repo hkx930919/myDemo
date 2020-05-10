@@ -119,23 +119,23 @@ module.exports = {
         {
           module: 'react',
           //   entry: 'umd/react.production.min.js',
-          entry: 'umd/react.production.min.js',
-          //   entry:
-          //     'https://cdn.bootcdn.net/ajax/libs/react/16.13.1/umd/react.development.js',
+          // entry: 'umd/react.production.min.js',
+          entry:
+            'https://cdn.bootcdn.net/ajax/libs/react/16.13.1/umd/react.development.js',
           global: 'React'
           //   supplements:[], // 其他需要引入的文件
           //   append:true, //默认在所有chunks之前引入，加入append后，会在chunks后引入
         },
         {
           module: 'react-dom',
-          //   entry:
-          //     'https://cdn.bootcdn.net/ajax/libs/react-dom/16.13.1/umd/react-dom.development.js',
+          entry:
+            'https://cdn.bootcdn.net/ajax/libs/react-dom/16.13.1/umd/react-dom.development.js',
           //   entry: 'umd/react-dom.production.min.js',
-          entry: 'umd/react-dom.production.min.js',
+          // entry: 'umd/react-dom.production.min.js',
           global: 'ReactDOM'
         }
       ]
-      //   enabled: process.env.NODE_ENV === 'production'
+      // enabled: process.env.NODE_ENV === 'production'
       //   outputPath: 'thirdparty' // 打包后的文件默认是放在vendor文件夹，修改后放在thirdparty文件夹
       //   publicPath: '../' //默认是webpack.output.publicPath，
       //   cwpOptions: {
