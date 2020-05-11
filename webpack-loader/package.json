@@ -76,16 +76,5 @@
     "> 1%",
     "iOS 7",
     "last 3 iOS versions"
-  ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.js": [
-      "eslint --fix",
-      "git add"
-    ]
-  }
+  ]
 }
