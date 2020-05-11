@@ -6,8 +6,6 @@ const {
   generateCssLoader
 } = require('./util')
 
-// eslint-disable-next-line import/no-dynamic-require
-// const baseEnv = require(`./config/${process.env.BUILD_ENV}.env`)
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const { projectRoot } = require('./constant')
@@ -49,20 +47,6 @@ module.exports = {
           },
           'less-loader',
           'postcss-loader'
-          //   {
-          //     loader: 'postcss-loader',
-          //     options: {
-          //       plugins: () => [
-          //         require('autoprefixer'),
-          //       ]
-          //     }
-          //   }
-          //   {
-          //     loader: 'px2rem-loader',
-          //     options: {
-          //       remUnit: 37.5
-          //     }
-          //   }
         ]
       }),
       generateCssLoader({
@@ -79,18 +63,6 @@ module.exports = {
             }
           },
           'postcss-loader'
-          // {
-          //   loader: 'postcss-loader'
-          //   options: {
-          //     plugins: () => [require('autoprefixer')]
-          //   }
-          // }
-          //   {
-          //     loader: 'px2rem-loader',
-          //     options: {
-          //       remUnit: 37.5
-          //     }
-          //   }
         ]
       }),
       {
