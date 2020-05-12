@@ -53,16 +53,13 @@ hook.tapPromise('first', name => {
   })
 })
 hook.tapAsync('second', (name, cb) => {
-  new Promise(resolve => {
-    setTimeout(() => {
-      console.log('second', name)
-      // resolve()
-      cb()
-    }, 1000)
-  })
+  setTimeout(() => {
+    console.log('second', name)
+    cb()
+  }, 1000)
 })
 /**
- * 如果最后一个注册事件不是tapPromise,那么promise不是执行
+ * 如果最后一个注册事件不是tapPromise,那么promise不会执行
  */
 hook.tapAsync('third', name => {
   console.log('third', name)
@@ -75,7 +72,7 @@ console.log('p', promise)
 
 promise.then(
   v => {
-    console.log('value', v)
+    console.log('value', v) // value undefined 值不会传递过来
   },
   e => {
     console.log('reason', e)

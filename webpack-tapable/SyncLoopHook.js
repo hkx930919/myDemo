@@ -4,41 +4,72 @@
  */
 const { SyncLoopHook } = require('tapable')
 const hook = new SyncLoopHook(['name'])
+const INDENT_SPACE = 4
+let firstCount = 0
+let secondCount = 0
+let thirdCount = 0
+let indent = 0
+
+function indentLog(...text) {
+  console.log(new Array(indent).join(' '), ...text)
+}
 
 hook.tap('first', name => {
-  console.log('first', name)
-  // 返回不为 undefined 的值
-  return name + ' - ' + 'first'
+  if (firstCount === 1) {
+    firstCount = 0
+    indent -= INDENT_SPACE
+    indentLog('</callback-first>')
+    return
+  }
+  firstCount++
+  indentLog('<callback-first>')
+  indent += INDENT_SPACE
+  return true
 })
 
-hook.tapAsync('second', (name, callback) => {
-  // 因为 tap 注册的事件回调返回了值，所以 name 为 callAsync - first
-  console.log('second', name)
-  // 在第二个参数中传入不为 undefined 的值
-  callback(null, name + ' - ' + ' second')
+hook.tap('second', name => {
+  if (secondCount === 1) {
+    secondCount = 0
+    indent -= INDENT_SPACE
+    indentLog('</callback-second>')
+    return
+  }
+  secondCount++
+  indentLog('<callback-second>')
+  indent += INDENT_SPACE
+  return true
 })
 
-hook.tapPromise('third', name => {
-  console.log('third', name)
-  // Promise 最终状态被置为 Fulfilled，并且值不为 undefined
-  return Promise.resolve(name + ' - ' + 'third')
+hook.tap('third', name => {
+  if (thirdCount === 1) {
+    thirdCount = 0
+    indent -= INDENT_SPACE
+    indentLog('</callback-third>')
+    return
+  }
+  thirdCount++
+  indentLog('<callback-third>')
+  indent += INDENT_SPACE
+  return true
 })
 
-hook.tap('fourth', name => {
-  // 当前事件回调没有返回不为 undefined 的值，因此 name 没有被替换
-  console.log('fourth', name)
-})
-
-hook.callAsync('callAsync', (error, result) => {
-  console.log('end', error, result)
-})
+hook.call('call')
 
 /**
  * Console output:
  *
- * first callAsync
- * second callAsync - first
- * third callAsync - first -  second
- * fourth callAsync - first -  second - third
- * end null callAsync - first -  second - third
+ *  <callback-first>
+ *  </callback-first>
+ *  <callback-second>
+ *     <callback-first>
+ *     </callback-first>
+ *  </callback-second>
+ *  <callback-third>
+ *     <callback-first>
+ *     </callback-first>
+ *     <callback-second>
+ *         <callback-first>
+ *         </callback-first>
+ *     </callback-second>
+ *  </callback-third>
  */
