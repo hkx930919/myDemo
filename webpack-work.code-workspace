@@ -1,14 +1,17 @@
 {
-    "folders": [
-		{
-			"path": "webpack-loader"
-		},
-		{
-			"path": "webpack-package"
-		},
-		{
-			"path": "mocha"
-		}
-	],
-    "settings": {}
+  "folders": [
+    {
+      "path": "webpack-loader"
+    },
+    {
+      "path": "webpack-package"
+    },
+    {
+      "path": "mocha"
+    },
+    {
+      "path": "webpack-my-loader-plugin"
+    }
+  ],
+  "settings": {}
 }
