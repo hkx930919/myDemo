@@ -4,7 +4,9 @@ import 'lib-flexible'
 import '../__base/index.module.less'
 import React from 'react'
 import ReactDom from 'react-dom'
-import aCssStyles from '../__base/a.module.css'
+// import aCssStyles from '../__base/a.module.css'
+import aCssStyles from '../__base/purify-test.module.less'
+import './test.css'
 
 console.log('process.env', process.env)
 console.log('process.env.BUILD_ENV', process.env.BUILD_ENV)
@@ -21,5 +23,10 @@ setTimeout(() => {
 // div.className = aCssStyles['a-flex']
 // document.body.append(div)
 
-const Comp = () => <div className={aCssStyles['a-flex']}>我是一个div</div>
+const Comp = () => (
+  <div className={aCssStyles['a-flex']}>
+    我是一个div
+    <span className="test">span</span>
+  </div>
+)
 ReactDom.render(<Comp />, document.getElementById('root'))
